@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>雙系統 -- Windows 7 &amp; Ubuntu 18.04 LTS | Jkrvivian&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="這幾天拿到了朝思暮想的 ThinkPad X220，最吸引我的是它的鍵盤跟招牌小紅點，其次是大小及重量，當然 ThinkPad 還有一些機制是我想試的。 本來就習慣了雙系統的環境，就選用的最近出來的 Ubuntu 18.04 LTS 安裝！順利安裝後卻遇到了 grub 始終抓不到 windows 7 的開機選項，以下提供解法。 Ubuntu 18.04 LTS 系統安裝流程 安裝流程其實十分簡單，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="雙系統 -- Windows 7 &amp; Ubuntu 18.04 LTS">
+<meta property="og:url" content="http://jkrvivian.github.io/2018/05/05/dual-system/index.html">
+<meta property="og:site_name" content="Jkrvivian&#39;s Blog">
+<meta property="og:description" content="這幾天拿到了朝思暮想的 ThinkPad X220，最吸引我的是它的鍵盤跟招牌小紅點，其次是大小及重量，當然 ThinkPad 還有一些機制是我想試的。 本來就習慣了雙系統的環境，就選用的最近出來的 Ubuntu 18.04 LTS 安裝！順利安裝後卻遇到了 grub 始終抓不到 windows 7 的開機選項，以下提供解法。 Ubuntu 18.04 LTS 系統安裝流程 安裝流程其實十分簡單，">
+<meta property="og:locale">
+<meta property="article:published_time" content="2018-05-05T08:01:58.000Z">
+<meta property="article:modified_time" content="2021-04-11T10:12:34.838Z">
+<meta property="article:author" content="Vivian Lin">
+<meta property="article:tag" content="ubuntu">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Jkrvivian's Blog" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Jkrvivian&#39;s Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Suche"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://jkrvivian.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-dual-system" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2018/05/05/dual-system/" class="article-date">
+  <time class="dt-published" datetime="2018-05-05T08:01:58.000Z" itemprop="datePublished">2018-05-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      雙系統 -- Windows 7 &amp; Ubuntu 18.04 LTS
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>這幾天拿到了朝思暮想的 ThinkPad X220，最吸引我的是它的鍵盤跟招牌小紅點，其次是大小及重量，當然 ThinkPad 還有一些機制是我想試的。</p>
+<p>本來就習慣了雙系統的環境，就選用的最近出來的 Ubuntu 18.04 LTS 安裝！順利安裝後卻遇到了 grub 始終抓不到 windows 7 的開機選項，以下提供解法。</p>
+<h3>Ubuntu 18.04 LTS 系統安裝流程</h3>
+安裝流程其實十分簡單，簡單歸納以下：
+<ol>
+     <li><strong><span style="color: #ff6600;">製作 LiveUSB 或燒錄開機碟</span></strong>
+<ol style="list-style-type: lower-alpha;">
+     <li>先至 <a target="_blank" rel="noopener" href="https://www.ubuntu.com/download">Ubuntu ISO 下載頁面</a> 下載 ISO 檔</li>
+     <li>右鍵點選 ISO 檔燒至光碟 or</li>
+     <li>利用 Rufus 等工具製作 LiveUSB</li>
+</ol>
+</li>
+     <li><strong><span style="color: #ff6600;">磁區分割</span></strong>
+<ul style="list-style-type: circle;">
+     <li>先在 windows 中分割安裝 Ubuntu 的磁區 or</li>
+     <li>直接利用製作好的 LiveUSB 或光碟選擇 Try Ubuntu，利用 GParted 切割</li>
+</ul>
+</li>
+     <li><strong><span style="color: #ff6600;">關閉 fastboot </span></strong>
+<ul>
+     <li>這部在我原本的筆電 (ASUS) 才需要做，否則無法進入 BIOS</li>
+</ul>
+</li>
+     <li><span style="color: #ff6600;"><strong>進入 BIOS</strong></span>
+<ul>
+     <li><strong>X220:</strong> 將 UEFI 的開機選項調為優先(預設是 legacy 優先)，儲存離開</li>
+     <li><strong>ASUS:</strong> 將 CMS 調整為 enable ，並在 boot 分頁中選擇 UEFI 光碟或 LiveUSB 開機</li>
+</ul>
+</li>
+     <li><strong><span style="color: #ff6600;">Ubuntu installer</span></strong>
+<ol>
+     <li>按照指示選擇語系、鍵盤、時區等</li>
+     <li>最後一個安裝選項選擇「其他」以進行進一步的磁區分割 /, /home 等</li>
+</ol>
+</li>
+     <li><strong><span style="color: #ff6600;">等待</span></strong></li>
+</ol>
+
+
+<h3>GRUB menu 沒有顯示</h3>
+<ol>
+     <li>進入 Ubuntu 並打開終端機</li>
+     <li>指令：`sudo gedit /etc/default/grub`</li>
+     <li>修改成以下：
+<pre><code>#GRUB_HIDDEN_TIMEOUT=0
+#GRUB_HIDDEN_TIMEOUT_QUIET=true
+GRUB_TIMEOUT_STYLE=menu</code></pre>
+</li>
+     <li>存檔離開，下指令 `sudo update-grub` 更新設定</li>
+     <li>重開機測試</li>
+</ol>
+
+<h3>GRUB 找不到 Win7</h3>
+由於我使用的 Win7 pro 沒有支援 UEFI 開機，而 Ubuntu 18.04 LTS 與 GRUB 的預設都是使用 UEFI，因此才造成 GRUB 遲遲抓不到。但這個情形在新的  Win7/8/10 就不會出現，因為他們兩種開機模式都支援。
+
+<p>因此我們切換開機模式為 legacy 就解決問題了！</p>
+<p><strong>步驟如下</strong>：</p>
+<ol>
+<li>依照下列指令安裝 boot-repair 工具，進行修正：</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-add-repository ppa:yannubuntu/boot-repair</span><br><span class="line"></span><br><span class="line">sudo apt-get update</span><br><span class="line"></span><br><span class="line">sudo apt-get install -y boot-repair</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>下指令 <code>boot-repair</code> ，開啟 GUI 介面後點選 <strong>&gt;進階選項</strong></li>
+<li>在 「GRUB 選項」分頁中，勾選 「使用 legacy GRUB」的選項</li>
+<li>重新開機後進入 Ubuntu 打開終端機 (這時 Win 7 還未出現，別緊張</li>
+</ol>
+<p>輸入指令：<code>sudo update-grub</code></p>
+<p>列出的選項中就會有 Win 7 囉！</p>
+<ol start="5">
+<li>重新開機就選擇 Win 7 試試囉！</li>
+</ol>
+<p><strong>參考資料：</strong></p>
+<ul>
+     <li>Grub menu 設定: <a target="_blank" rel="noopener" href="https://askubuntu.com/questions/475993/grub-update-warning-in-ubuntu-14-04/742308">Grub update warning in Ubuntu 14.04</a></li>
+     <li><span class="threadtitle">Win 7 不見的原因: <a target="_blank" rel="noopener" href="https://ubuntuforums.org/showthread.php?t=2232329">Dual boot grub missing Windows 7</a></span></li>
+     <li>boot-repair 使用: <a target="_blank" rel="noopener" href="https://www.howtogeek.com/114884/how-to-repair-grub2-when-ubuntu-wont-boot/">How to Repair GRUB2 When Ubuntu Won’t Boot</a></li>
+</ul>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://jkrvivian.github.io/2018/05/05/dual-system/" data-id="cknd0dgka0005ej4wg0asck09" data-title="雙系統 -- Windows 7 &amp; Ubuntu 18.04 LTS" class="article-share-link">Teilen</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ubuntu/" rel="tag">ubuntu</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/04/03/compiler-lexical-detail/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Älter</strong>
+      <div class="article-nav-title">噢！我的編譯器 – Lexical Analysis Detail</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/compiler/" rel="tag">compiler</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/music/" rel="tag">music</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/programming/" rel="tag">programming</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubuntu/" rel="tag">ubuntu</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/compiler/" style="font-size: 20px;">compiler</a> <a href="/tags/music/" style="font-size: 10px;">music</a> <a href="/tags/programming/" style="font-size: 10px;">programming</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">letzter Beitrag</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/05/05/dual-system/">雙系統 -- Windows 7 &amp; Ubuntu 18.04 LTS</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/03/compiler-lexical-detail/">噢！我的編譯器 – Lexical Analysis Detail</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/30/my-2-double/">代表我的兩個 Double</a>
+          </li>
+        
+          <li>
+            <a href="/2018/02/22/compiler-lexical-overview/">噢！我的編譯器 - Lexical Analysis Overview</a>
+          </li>
+        
+          <li>
+            <a href="/2018/02/02/compiler-intro-2/">噢！我的編譯器 - Introduction II</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2021 Vivian Lin<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

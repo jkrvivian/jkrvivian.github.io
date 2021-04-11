@@ -4,19 +4,14 @@
   <meta charset="utf-8">
   
   
-  <title>代表我的兩個 Double | Jkrvivian&#39;s Blog</title>
+  <title>Archiv: 2018/5 | Jkrvivian&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="前些天嵌入式課程中的考題十分有趣，利用了 double 轉成有意義的字串。 這在某些應用場景十分有用，可以單純使用數值表示字串，甚至透過一些數值運算可以更改字串內容。 題目出處：week5 隨堂測驗(中) 以下是能夠印出我 ID 的 double，是隨堂測驗中的延伸題。 output: jkrvivian 12345678#include &lt;stdio.h&gt;int main()&amp;#12">
-<meta property="og:type" content="article">
-<meta property="og:title" content="代表我的兩個 Double">
-<meta property="og:url" content="http://jkrvivian.github.io/2018/03/30/my-2-double/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Jkrvivian&#39;s Blog">
+<meta property="og:url" content="http://jkrvivian.github.io/archives/2018/05/index.html">
 <meta property="og:site_name" content="Jkrvivian&#39;s Blog">
-<meta property="og:description" content="前些天嵌入式課程中的考題十分有趣，利用了 double 轉成有意義的字串。 這在某些應用場景十分有用，可以單純使用數值表示字串，甚至透過一些數值運算可以更改字串內容。 題目出處：week5 隨堂測驗(中) 以下是能夠印出我 ID 的 double，是隨堂測驗中的延伸題。 output: jkrvivian 12345678#include &lt;stdio.h&gt;int main()&amp;#12">
 <meta property="og:locale">
-<meta property="article:published_time" content="2018-03-30T03:25:49.000Z">
-<meta property="article:modified_time" content="2021-04-11T09:44:15.522Z">
 <meta property="article:author" content="Vivian Lin">
-<meta property="article:tag" content="programming">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="Jkrvivian's Blog" type="application/atom+xml">
@@ -74,68 +69,39 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-my-2-double" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2018/03/30/my-2-double/" class="article-date">
-  <time class="dt-published" datetime="2018-03-30T03:25:49.000Z" itemprop="datePublished">2018-03-30</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
+        <section id="main">
   
-    <h1 class="p-name article-title" itemprop="headline name">
-      代表我的兩個 Double
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2018" class="archive-year">2018</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2018/05/05/dual-system/" class="archive-article-date">
+  <time class="dt-published" datetime="2018-05-05T08:01:58.000Z" itemprop="datePublished">May 5</time>
+</a>
+      
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2018/05/05/dual-system/">雙系統 -- Windows 7 &amp; Ubuntu 18.04 LTS</a>
     </h1>
   
 
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>前些天嵌入式課程中的考題十分有趣，利用了 double 轉成有意義的字串。</p>
-<p>這在某些應用場景十分有用，可以單純使用數值表示字串，甚至透過一些數值運算可以更改字串內容。</p>
-<p>題目出處：<a target="_blank" rel="noopener" href="https://drive.google.com/open?id=19ceIq9crvvip_9cY8nNbL01l3ml2hXMR">week5 隨堂測驗(中)</a></p>
-<p>以下是能夠印出我 ID 的 double，是隨堂測驗中的延伸題。</p>
-<p>output: jkrvivian</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">double</span> m[] = &#123; <span class="number">1.7899031678214814931707136432e161</span>,</span><br><span class="line">                   <span class="number">5.43472210425371198594225672155e-322</span> &#125;;</span><br><span class="line">    <span class="built_in">puts</span>((<span class="keyword">char</span> *)m);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://jkrvivian.github.io/2018/03/30/my-2-double/" data-id="cknd0dgkm000eej4w0apj9q4d" data-title="代表我的兩個 Double" class="article-share-link">Teilen</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/programming/" rel="tag">programming</a></li></ul>
-
-    </footer>
+    </header>
   </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2018/04/03/compiler-lexical-detail/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Neuer</strong>
-      <div class="article-nav-title">
-        
-          噢！我的編譯器 – Lexical Analysis Detail
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2018/02/22/compiler-lexical-overview/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Älter</strong>
-      <div class="article-nav-title">噢！我的編譯器 - Lexical Analysis Overview</div>
-    </a>
-  
-</nav>
-
-  
 </article>
+  
+  
+    </div></section>
+  
 
 
 </section>
