@@ -135,11 +135,56 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jkrvivian.github.io/2018/04/03/compiler-lexical-detail/" data-id="ckncyyhr40003934w4d75108q" data-title="噢！我的編譯器 – Lexical Analysis Detail" class="article-share-link">Teilen</a>
+      <a data-url="http://jkrvivian.github.io/2018/04/03/compiler-lexical-detail/" data-id="cknczoq810003ql4w5rm79gc6" data-title="噢！我的編譯器 – Lexical Analysis Detail" class="article-share-link">Teilen</a>
       
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/compiler/" rel="tag">compiler</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-my-2-double" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2018/03/30/my-2-double/" class="article-date">
+  <time class="dt-published" datetime="2018-03-30T03:25:49.000Z" itemprop="datePublished">2018-03-30</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2018/03/30/my-2-double/">代表我的兩個 Double</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>前些天嵌入式課程中的考題十分有趣，利用了 double 轉成有意義的字串。</p>
+<p>這在某些應用場景十分有用，可以單純使用數值表示字串，甚至透過一些數值運算可以更改字串內容。</p>
+<p>題目出處：<a target="_blank" rel="noopener" href="https://drive.google.com/open?id=19ceIq9crvvip_9cY8nNbL01l3ml2hXMR">week5 隨堂測驗(中)</a></p>
+<p>以下是能夠印出我 ID 的 double，是隨堂測驗中的延伸題。</p>
+<p>output: jkrvivian</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">double</span> m[] = &#123; <span class="number">1.7899031678214814931707136432e161</span>,</span><br><span class="line">                   <span class="number">5.43472210425371198594225672155e-322</span> &#125;;</span><br><span class="line">    <span class="built_in">puts</span>((<span class="keyword">char</span> *)m);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://jkrvivian.github.io/2018/03/30/my-2-double/" data-id="cknczoq840005ql4w0yp00d4i" data-title="代表我的兩個 Double" class="article-share-link">Teilen</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/programming/" rel="tag">programming</a></li></ul>
 
     </footer>
   </div>
@@ -260,7 +305,7 @@ token 跟 lexeme 的解釋很相像，可以用 class 跟 instance 的關係更�
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jkrvivian.github.io/2018/02/22/compiler-lexical-overview/" data-id="ckncyyhr50004934wdchma3ph" data-title="噢！我的編譯器 - Lexical Analysis Overview" class="article-share-link">Teilen</a>
+      <a data-url="http://jkrvivian.github.io/2018/02/22/compiler-lexical-overview/" data-id="cknczoq820004ql4wg1pqgvve" data-title="噢！我的編譯器 - Lexical Analysis Overview" class="article-share-link">Teilen</a>
       
       
       
@@ -333,7 +378,7 @@ token 跟 lexeme 的解釋很相像，可以用 class 跟 instance 的關係更�
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jkrvivian.github.io/2018/02/02/compiler-intro-2/" data-id="ckncyyhr00001934wdtp6f9x0" data-title="噢！我的編譯器 - Introduction II" class="article-share-link">Teilen</a>
+      <a data-url="http://jkrvivian.github.io/2018/02/02/compiler-intro-2/" data-id="cknczoq7x0001ql4w3lireuxy" data-title="噢！我的編譯器 - Introduction II" class="article-share-link">Teilen</a>
       
       
       
@@ -424,7 +469,7 @@ token 跟 lexeme 的解釋很相像，可以用 class 跟 instance 的關係更�
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jkrvivian.github.io/2018/01/30/compiler-intro-1/" data-id="ckncyyhqu0000934w8g8zdogr" data-title="噢！我的編譯器 - Introduction I" class="article-share-link">Teilen</a>
+      <a data-url="http://jkrvivian.github.io/2018/01/30/compiler-intro-1/" data-id="cknczoq7r0000ql4wcqxigr92" data-title="噢！我的編譯器 - Introduction I" class="article-share-link">Teilen</a>
       
       
       
@@ -470,7 +515,7 @@ token 跟 lexeme 的解釋很相像，可以用 class 跟 instance 的關係更�
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jkrvivian.github.io/2018/01/27/tokio-hotel-md/" data-id="ckncyyhr60005934we3zg9u7c" data-title="德國天團 Tokio Hotel" class="article-share-link">Teilen</a>
+      <a data-url="http://jkrvivian.github.io/2018/01/27/tokio-hotel-md/" data-id="cknczoq860008ql4w71dl56h9" data-title="德國天團 Tokio Hotel" class="article-share-link">Teilen</a>
       
       
       
@@ -497,7 +542,7 @@ token 跟 lexeme 的解釋很相像，可以用 class 跟 instance 的關係更�
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/compiler/" rel="tag">compiler</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/music/" rel="tag">music</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/compiler/" rel="tag">compiler</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/music/" rel="tag">music</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/programming/" rel="tag">programming</a></li></ul>
     </div>
   </div>
 
@@ -507,7 +552,7 @@ token 跟 lexeme 的解釋很相像，可以用 class 跟 instance 的關係更�
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/compiler/" style="font-size: 20px;">compiler</a> <a href="/tags/music/" style="font-size: 10px;">music</a>
+      <a href="/tags/compiler/" style="font-size: 20px;">compiler</a> <a href="/tags/music/" style="font-size: 10px;">music</a> <a href="/tags/programming/" style="font-size: 10px;">programming</a>
     </div>
   </div>
 
@@ -516,7 +561,7 @@ token 跟 lexeme 的解釋很相像，可以用 class 跟 instance 的關係更�
   <div class="widget-wrap">
     <h3 class="widget-title">Archiv</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li></ul>
     </div>
   </div>
 
@@ -533,6 +578,10 @@ token 跟 lexeme 的解釋很相像，可以用 class 跟 instance 的關係更�
           </li>
         
           <li>
+            <a href="/2018/03/30/my-2-double/">代表我的兩個 Double</a>
+          </li>
+        
+          <li>
             <a href="/2018/02/22/compiler-lexical-overview/">噢！我的編譯器 - Lexical Analysis Overview</a>
           </li>
         
@@ -542,10 +591,6 @@ token 跟 lexeme 的解釋很相像，可以用 class 跟 instance 的關係更�
         
           <li>
             <a href="/2018/01/30/compiler-intro-1/">噢！我的編譯器 - Introduction I</a>
-          </li>
-        
-          <li>
-            <a href="/2018/01/27/tokio-hotel-md/">德國天團 Tokio Hotel</a>
           </li>
         
       </ul>
