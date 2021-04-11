@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>GitHub - Sign Commits With Your GPG Key | Jkrvivian&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Why?   Security!  GitHub 是知名的版本控制平台，也是開發者們的大寶庫，可以在上面找到各式各樣的開源專案，學習應用兩相宜。當然也有很多社群甚至公司也採用 GitHub 進行專案開發，但除了基本的 Git 操作，其中的安全議題是常常為人所忽略的。    我也是在聽完公司同仁分享才開始重視這個議題，於是終於啟用 GPG key 簽署 commit，也啟動 2FA 的驗證。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GitHub - Sign Commits With Your GPG Key">
+<meta property="og:url" content="http://jkrvivian.github.io/2020/03/28/gpg-sign/index.html">
+<meta property="og:site_name" content="Jkrvivian&#39;s Blog">
+<meta property="og:description" content="Why?   Security!  GitHub 是知名的版本控制平台，也是開發者們的大寶庫，可以在上面找到各式各樣的開源專案，學習應用兩相宜。當然也有很多社群甚至公司也採用 GitHub 進行專案開發，但除了基本的 Git 操作，其中的安全議題是常常為人所忽略的。    我也是在聽完公司同仁分享才開始重視這個議題，於是終於啟用 GPG key 簽署 commit，也啟動 2FA 的驗證。">
+<meta property="og:locale">
+<meta property="og:image" content="https://i0.wp.com/jkrvivian.com/blog/wp-content/uploads/2020/03/Screenshot-from-2020-03-28-15-07-57.png?fit=640%2C43">
+<meta property="article:published_time" content="2020-03-28T08:54:21.000Z">
+<meta property="article:modified_time" content="2021-04-11T15:56:40.601Z">
+<meta property="article:author" content="Vivian Lin">
+<meta property="article:tag" content="github">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i0.wp.com/jkrvivian.com/blog/wp-content/uploads/2020/03/Screenshot-from-2020-03-28-15-07-57.png?fit=640%2C43">
+  
+    <link rel="alternate" href="/atom.xml" title="Jkrvivian's Blog" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Jkrvivian&#39;s Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Suche"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://jkrvivian.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-gpg-sign" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2020/03/28/gpg-sign/" class="article-date">
+  <time class="dt-published" datetime="2020-03-28T08:54:21.000Z" itemprop="datePublished">2020-03-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      GitHub - Sign Commits With Your GPG Key
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2>Why?   Security!</h2>
+
+<p>GitHub 是知名的版本控制平台，也是開發者們的大寶庫，可以在上面找到各式各樣的開源專案，學習應用兩相宜。當然也有很多社群甚至公司也採用 GitHub 進行專案開發，但除了基本的 Git 操作，其中的安全議題是常常為人所忽略的。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>我也是在聽完公司同仁分享才開始重視這個議題，於是終於啟用 GPG key 簽署 commit，也啟動 2FA 的驗證。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":3} -->
+<h3>Enable 2FA</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>GitHub 的登入就如一般的服務，只要輸入帳密即可操作該帳號的專案，然而一般人總懶的時時更換密碼，也因此容易成為安全漏洞，若取得帳戶便能肆意修改專案。因此啟動 2FA 兩階段驗證便是一道重要的防火牆，然而這也只是最基本的第一步。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":3} -->
+<h3>Enable SSH key</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>透過 SSH key 可以有效的管理並限制哪些授權裝置能使用自己的帳號發布、修改、刪除專案等操作。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":3} -->
+<h3>Enable GPG key</h3>
+<!-- /wp:heading -->
+
+<!-- wp:tadv/classic-paragraph -->
+<p>有了上述兩個設定，為什麼需要 GPG key 進行 commit 簽署呢？原因也很簡單，就是要確保此 commit 真為本人所提交，讓其他使用者確信這項修改或 release 來自可信賴的源頭。在同事的簡報中，他特別點出若是專案中有牽涉到與加密相關的操作就更應該使用 GPG key 簽署。簽署後的 commit 在 Github 上會顯示 <span style="color: #339966;"><strong>Verified</strong></span>，如附圖：</p>
+<!-- /wp:tadv/classic-paragraph -->
+
+<!-- wp:image {"id":336,"sizeSlug":"large"} -->
+<figure class="wp-block-image size-large"><img src="https://i0.wp.com/jkrvivian.com/blog/wp-content/uploads/2020/03/Screenshot-from-2020-03-28-15-07-57.png?fit=640%2C43" alt="" class="wp-image-336"/></figure>
+<!-- /wp:image -->
+
+<!-- wp:tadv/classic-paragraph -->
+<p>接下來就引導讀者們如何使用 GPG key 簽署 commit! 我的環境是 <strong>Ubuntu 16.04 &amp; Ubuntu 18.04<br></strong></p>
+<p>依照以下步驟：</p>
+<ol>
+<li>安裝 gnupg2</li>
+<li>產生 GPG key</li>
+<li>登錄 GPG key</li>
+<li>本機端的 Git 設定</li>
+<li>簽署 commit</li>
+</ol>
+<!-- /wp:tadv/classic-paragraph -->
+
+<!-- wp:heading {"level":4} -->
+<h4>Install gnupg2</h4>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>gnupg 是用來生產 GPG key 的套件。在 Ubuntu 16.04 中已預設裝有 gnupg 1.4.20，但 GitHub 的官方教學建議我們使用 v2 以上，因此需要安裝 gnupg2，版本為 v2.1.11 : </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:syntaxhighlighter/code {"language":"bash"} -->
+<pre class="wp-block-syntaxhighlighter-code">sudo apt install gnupg2</pre>
+<!-- /wp:syntaxhighlighter/code -->
+
+<!-- wp:paragraph -->
+<p><strong>Ubuntu 18.04 的預設 gpg 已是 v2 以上，可以跳過這步驟</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":4} -->
+<h4>Generate a GPG key</h4>
+<!-- /wp:heading -->
+
+<!-- wp:tadv/classic-paragraph -->
+<p>Ubuntu 16.04:</p>
+<!-- /wp:tadv/classic-paragraph -->
+
+<!-- wp:syntaxhighlighter/code {"language":"bash"} -->
+<pre class="wp-block-syntaxhighlighter-code">$ gpg2 --full-gen-key</pre>
+<!-- /wp:syntaxhighlighter/code -->
+
+<!-- wp:tadv/classic-paragraph -->
+<p>Ubuntu 18.04:</p>
+<!-- /wp:tadv/classic-paragraph -->
+
+<!-- wp:syntaxhighlighter/code {"language":"bash"} -->
+<pre class="wp-block-syntaxhighlighter-code">$ gpg --full-generate-key</pre>
+<!-- /wp:syntaxhighlighter/code -->
+
+<!-- wp:tadv/classic-paragraph -->
+<ol>
+<li>接著會跳出 cli prompt 詢問要產生哪種金鑰，可以直接按 <strong>Enter</strong> 鍵選擇 <em>RSA and RSA (default)</em></li>
+<li>金鑰長度，必須要是 4096 bits 以上，因此輸入 <strong>4096</strong></li>
+<li>選擇金鑰的有效期限，輸入 <strong>Enter</strong> 以選擇 <em>key does not expire</em>&nbsp;</li>
+<li>確認選擇，輸入 <strong>y</strong></li>
+<li>輸入真實姓名</li>
+<li>輸入 email，<span style="color: #ff0000;">此 email 需在 GitHub 網站上驗證過</span></li>
+<li>輸入 comment，可以留空，直接按 Enter 進行下一步</li>
+<li>確認已輸入的個人資訊，輸入 <strong>O</strong> 以確認</li>
+<li>輸入 secure passphrase，進行簽署時需要輸入這組密碼</li>
+<li>cli prompt 會請使用者隨意按鍵會移動滑鼠以幫助取得 entropy，這是產生隨機數的重要元件。可能會遇到電腦在這關卡太久，因為產生的 entropy 太少，可以透過指令查看 entropy 的數目：</li>
+</ol>
+<!-- /wp:tadv/classic-paragraph -->
+
+<!-- wp:syntaxhighlighter/code {"language":"bash"} -->
+<pre class="wp-block-syntaxhighlighter-code">$ watch -n1 cat /proc/sys/kernel/random/entropy_avail</pre>
+<!-- /wp:syntaxhighlighter/code -->
+
+<!-- wp:tadv/classic-paragraph -->
+<p>並透過安裝 rng-tools 加速亂數產生。我一裝完也就產生完了 XD</p>
+<!-- /wp:tadv/classic-paragraph -->
+
+<!-- wp:syntaxhighlighter/code -->
+<pre class="wp-block-syntaxhighlighter-code">$ sudo apt install rng-tools</pre>
+<!-- /wp:syntaxhighlighter/code -->
+
+<!-- wp:tadv/classic-paragraph -->
+<ol>
+<li value="11">簽章測試，測試是否能用以產生的 GPG key 簽名</li>
+</ol>
+<!-- /wp:tadv/classic-paragraph -->
+
+<!-- wp:syntaxhighlighter/code -->
+<pre class="wp-block-syntaxhighlighter-code">$ echo "test" | gpg --clearsign
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA512
+
+test
+-----BEGIN PGP SIGNATURE-----
+....
+-----END PGP SIGNATURE-----</pre>
+<!-- /wp:syntaxhighlighter/code -->
+
+<!-- wp:tadv/classic-paragraph -->
+<p>若沒辦法進行簽章可能要先升級套件：</p>
+<!-- /wp:tadv/classic-paragraph -->
+
+<!-- wp:syntaxhighlighter/code {"language":"bash"} -->
+<pre class="wp-block-syntaxhighlighter-code">$ sudo apt upgrade gpg</pre>
+<!-- /wp:syntaxhighlighter/code -->
+
+<!-- wp:heading {"level":4} -->
+<h4>Register GPG key on GitHub</h4>
+<!-- /wp:heading -->
+
+<!-- wp:tadv/classic-paragraph -->
+<ol>
+<li>先透過指令查看金鑰資訊：</li>
+</ol>
+<!-- /wp:tadv/classic-paragraph -->
+
+<!-- wp:syntaxhighlighter/code -->
+<pre class="wp-block-syntaxhighlighter-code">$ gpg --list-secret-keys --keyid-format LONG
+/home/userID/.gnupg/pubring.kbx
+------------------------------------
+sec   rsa4096/3AA5C34371567BD2 2016-03-10 [SC]
+uid                          Hubot 
+ssb   rsa4096/42B317FD4BA89E7A 2016-03-10</pre>
+<!-- /wp:syntaxhighlighter/code -->
+
+<!-- wp:tadv/classic-paragraph -->
+<ol>
+<li value="2">複製 keyID, 上面的例子 ID 為 <em>3AA5C34371567BD2</em>：</li>
+</ol>
+<!-- /wp:tadv/classic-paragraph -->
+
+<!-- wp:syntaxhighlighter/code -->
+<pre class="wp-block-syntaxhighlighter-code">$ gpg --armor --export 3AA5C34371567BD2
+# Prints the GPG key ID, in ASCII armor format</pre>
+<!-- /wp:syntaxhighlighter/code -->
+
+<!-- wp:tadv/classic-paragraph -->
+<ol>
+<li value="3">產生 key block，整段複製(包含 <code>-----BEGIN PGP PUBLIC KEY BLOCK----- </code>與<code>-----END PGP PUBLIC KEY BLOCK-----</code>)</li>
+<li>進入 Github 的頁面<strong> <em>settings -&gt; SSh and GPG keys</em></strong></li>
+<li>點選 <strong>New GPG key</strong>，貼上 <strong>3.</strong> 所複製的 key block</li>
+<li>輸入 GitHub 密碼確認</li>
+<li>完成！！</li>
+</ol>
+<!-- /wp:tadv/classic-paragraph -->
+
+<!-- wp:heading {"level":4} -->
+<h4>GPG key settings first</h4>
+<!-- /wp:heading -->
+
+<ol>
+<li>之後提交 commit 時使用某把 key 進行簽署：</li>
+</ol>
+
+<!-- wp:syntaxhighlighter/code -->
+<pre class="wp-block-syntaxhighlighter-code">$ git config --global user.signingkey &lt;keyID>
+$ git config --global commit.gpgsign true   // optional, 每次 commit 都要簽名
+$ git config --global gpg.program gpg2       // Ubuntu 16.04 only, 使用 gpg2</pre>
+<!-- /wp:syntaxhighlighter/code -->
+
+<!-- wp:heading {"level":4} -->
+<h4>&nbsp;Sign your commit!</h4>
+<!-- /wp:heading -->
+
+<!-- wp:tadv/classic-paragraph -->
+<p>一行指令，非常簡單！ <strong>-S</strong> 就是簽名 commit</p>
+<!-- /wp:tadv/classic-paragraph -->
+
+<!-- wp:syntaxhighlighter/code {"language":"bash"} -->
+<pre class="wp-block-syntaxhighlighter-code">$ git commit -S -m "success!"
+$ git log --show-signature -1    // 查看剛簽章的 commit</pre>
+<!-- /wp:syntaxhighlighter/code -->
+
+<!-- wp:heading {"level":3} -->
+<h3>References:</h3>
+<!-- /wp:heading -->
+
+<!-- wp:tadv/classic-paragraph -->
+<ul>
+<li><a target="_blank" rel="noopener" href="https://help.github.com/en/github/authenticating-to-github/generating-a-new-gpg-key">GitHub help: Generating a new GPG key</a></li>
+<li><a target="_blank" rel="noopener" href="https://help.github.com/en/github/authenticating-to-github/adding-a-new-gpg-key-to-your-github-account">GitHub help: Adding a new GPG key to your GitHub account</a></li>
+<li><a target="_blank" rel="noopener" href="https://help.github.com/en/github/authenticating-to-github/signing-commits">GitHub help: Signing commits</a></li>
+<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/32941064/gpg-hangs-on-entropy-generation">GPG hangs on entropy generation</a></li>
+<li><a href="http://gpg --gen-key hangs at gaining enough entropy on centos 6" data-wplink-url-error="true">gpg --gen-key hangs at gaining enough entropy on centos 6</a></li>
+</ul>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://jkrvivian.github.io/2020/03/28/gpg-sign/" data-id="ckndco30z0008wu4wbky752ij" data-title="GitHub - Sign Commits With Your GPG Key" class="article-share-link">Teilen</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/github/" rel="tag">github</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2019/06/08/iota-intern-interview/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Älter</strong>
+      <div class="article-nav-title">IOTA Foundation Research Intern (Remote) Interview</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/IOTA/" rel="tag">IOTA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/compiler/" rel="tag">compiler</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/" rel="tag">github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/music/" rel="tag">music</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/programming/" rel="tag">programming</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubuntu/" rel="tag">ubuntu</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/IOTA/" style="font-size: 10px;">IOTA</a> <a href="/tags/compiler/" style="font-size: 20px;">compiler</a> <a href="/tags/github/" style="font-size: 10px;">github</a> <a href="/tags/music/" style="font-size: 10px;">music</a> <a href="/tags/programming/" style="font-size: 10px;">programming</a> <a href="/tags/ubuntu/" style="font-size: 15px;">ubuntu</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">letzter Beitrag</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/03/28/gpg-sign/">GitHub - Sign Commits With Your GPG Key</a>
+          </li>
+        
+          <li>
+            <a href="/2019/06/08/iota-intern-interview/">IOTA Foundation Research Intern (Remote) Interview</a>
+          </li>
+        
+          <li>
+            <a href="/2018/06/03/ubuntu-vscode-install/">Ubuntu 18.04 安裝 Visual Studio Code</a>
+          </li>
+        
+          <li>
+            <a href="/2018/05/05/dual-system/">雙系統 -- Windows 7 &amp; Ubuntu 18.04 LTS</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/03/compiler-lexical-detail/">噢！我的編譯器 – Lexical Analysis Detail</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2021 Vivian Lin<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
