@@ -71,57 +71,6 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-hello-world" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2021/04/11/hello-world/" class="article-date">
-  <time class="dt-published" datetime="2021-04-11T07:34:23.588Z" itemprop="datePublished">2021-04-11</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/04/11/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://jkrvivian.github.io/2021/04/11/hello-world/" data-id="ckncx6hyo0000ed4w3a5y0968" data-title="Hello World" class="article-share-link">Teilen</a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
     <article id="post-compiler-intro-1-md" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2018/01/30/compiler-intro-1-md/" class="article-date">
@@ -153,44 +102,58 @@
 </ul>
 <p>希望能夠闡述的更輕鬆且容易理解，大致上就這樣，我們開始吧！</p>
 <h3 id="Introduction-I"><a href="#Introduction-I" class="headerlink" title="Introduction I"></a>Introduction I</h3><p>其實編譯器的角色套用在現實生活中能夠特別清楚的解釋他的角色及功用 – <strong>翻譯人員</strong>。不論是即時口譯還是各節目或動畫的專業字幕組都是，反正只要始能把 A 語言流暢的翻成 B 語言的都算。但翻譯的工作並不是那麼簡單，需要理解某語言的生字、語法才能夠進行，當然更專業的人員還能夠使用精簡的句子傳達意境，甚至即使他文法錯了，翻譯大大也能理解並<strong>精準的</strong>譯出正確的意思。總之，翻譯其實不僅僅是「翻譯」，還要再經過「編輯」，這也就是 “compile” 「編譯」的意思。</p>
-<h5>編譯器 Compiler</h5>
-了解之後，我們再把視角拉回 compiler 上，<strong>compiler 就是程式語言間的翻譯員</strong>，不同的 compiler 會編譯成不同的語言，有可能是轉成機器語言(machine code)、byte code，甚至是另一種語言，如圖:
+<h4 id="編譯器-Compiler"><a href="#編譯器-Compiler" class="headerlink" title="編譯器 Compiler"></a>編譯器 Compiler</h4><p>了解之後，我們再把視角拉回 compiler 上，<strong>compiler 就是程式語言間的翻譯員</strong>，不同的 compiler 會編譯成不同的語言，有可能是轉成機器語言(machine code)、byte code，甚至是另一種語言，如圖:</p>
+<figure>
+    <img title="編譯器 compiler" src="https://i.imgur.com/VoFfTlC.png" alt="" width="403" height="79" />
+    <figcaption style="text-align:center">編譯器 compiler</figcaption>
+</figure>
 
-<p>[caption id=”” align=”aligncenter” width=”403”]<img title="編譯器 compiler" src="https://i.imgur.com/VoFfTlC.png" alt="" width="403" height="79" /> 編譯器 compiler[/caption]</p>
-<p>&nbsp;</p>
+
 <p>產生出來的 target program 就能夠執行囉！所以程式的編譯到執行是這樣的：</p>
-<p>[caption id=”” align=”aligncenter” width=”403”]<img title="從原始碼到編譯執行" src="https://i.imgur.com/mfg6GXG.png" alt="" width="403" height="315" /> 從原始碼到編譯執行[/caption]</p>
-<h5>直譯器 Interpreter</h5>
-還有另一種語言處理的工具：<strong>直譯器 (interpreter)</strong>。相較於上圖，compiler 是編譯程式碼後產出可執行的程式碼，由使用者輸入 input 後，再得到 output。而直譯器是 source code 與 input 一次給，<strong>直接編譯並執行</strong>，產出 output ，而使用直譯器的語言有大名鼎鼎的 python。而的架構圖如下：
+<figure>
+    <img title="從原始碼到編譯執行" src="https://i.imgur.com/mfg6GXG.png" alt="" width="403" height="315" />
+    <figcaption style="text-align:center">從原始碼到編譯執行</figcaption>
+</figure>
 
-<p>[caption id=”” align=”aligncenter” width=”222”]<img title="直譯器 Interpreter" src="https://i.imgur.com/SUm3jVH.png" alt="" width="222" height="293" /> 直譯器 Interpreter[/caption]</p>
+
+<h4 id="直譯器-Interpreter"><a href="#直譯器-Interpreter" class="headerlink" title="直譯器 Interpreter"></a>直譯器 Interpreter</h4><p>還有另一種語言處理的工具：<strong>直譯器 (interpreter)<strong>。相較於上圖，compiler 是編譯程式碼後產出可執行的程式碼，由使用者輸入 input 後，再得到 output。而直譯器是 source code 與 input 一次給，</strong>直接編譯並執行</strong>，產出 output ，而使用直譯器的語言有大名鼎鼎的 python。而的架構圖如下：</p>
+<figure>
+    <img title="直譯器 Interpreter" src="https://i.imgur.com/SUm3jVH.png" alt="" width="222" height="293" />
+    <figcaption style="text-align:center">直譯器 Interpreter</figcaption>
+</figure>
+
 <p>而 compiler 與 interpreter 還有速度上的差異，compiler 產生的 target program 執行的比 interpreter 快。但 interpreter 的偵錯又比較好了，畢竟是一行行程式碼檢查與執行下來。</p>
-<h5>compilation + interpretation</h5>
-再來，勢必要提及赫赫有名的 Java，為什麼呢？Java 是一個結合 compilation 和 interpretation 的程式語言，這是什麼意思？就是 Java 會先編譯成一種編碼稱為 <strong>byte code</strong>，接著再直譯成機器碼。這個的好處是，Java 經過一次編譯，就可以透過<strong>虛擬機</strong> (<strong>virtual machine)</strong> 在不同的機器上直譯執行。沿用翻譯員的例子，byte code 就有像是目前的國際語言<strong>英文</strong>，只要 A 語言翻譯成英文，到 B 國人人都能直接把英語翻譯成自己的語言(當然前提是大家都會英文)，因此到任何國家都能夠溝通了！整個架構可以繪製成下圖：
+<h4 id="compilation-interpretation"><a href="#compilation-interpretation" class="headerlink" title="compilation + interpretation"></a>compilation + interpretation</h4><p>再來，勢必要提及赫赫有名的 Java，為什麼呢？Java 是一個結合 compilation 和 interpretation 的程式語言，這是什麼意思？就是 Java 會先編譯成一種編碼稱為 <strong>byte code</strong>，接著再直譯成機器碼。這個的好處是，Java 經過一次編譯，就可以透過<strong>虛擬機</strong> (<strong>virtual machine</strong>) 在不同的機器上直譯執行。沿用翻譯員的例子，byte code 就有像是目前的國際語言<strong>英文</strong>，只要 A 語言翻譯成英文，到 B 國人人都能直接把英語翻譯成自己的語言(當然前提是大家都會英文)，因此到任何國家都能夠溝通了！整個架構可以繪製成下圖：</p>
+<figure>
+    <img title="hybrid compiler" src="https://i.imgur.com/6RnzT7T.png" alt="" width="260" height="507" />
+    <figcaption style="text-align:center">hybrid compiler</figcaption>
+</figure>
 
-<p>[caption id=”” align=”aligncenter” width=”260”]<img title="hybrid compiler" src="https://i.imgur.com/6RnzT7T.png" alt="" width="260" height="507" /> hybrid compiler[/caption]</p>
-<h5>編譯系統 Compilation System</h5>
-了解編譯器的角色與功能後，我們可以接著探討編譯系統是由哪些角色所組成的。
+
+<h4 id="編譯系統-Compilation-System"><a href="#編譯系統-Compilation-System" class="headerlink" title="編譯系統 Compilation System"></a>編譯系統 Compilation System</h4><p>了解編譯器的角色與功能後，我們可以接著探討編譯系統是由哪些角色所組成的。</p>
 <ol>
-     <li><strong>預處理 (preprocessor)</strong>: 負責在引用 header file、libraries 的檔案插入完整的程式碼，以 C 為例就是根據     `#` 開頭的指令，e.g. `#include &lt;stdio.h&gt;`，直接插入 stdio.h 的內容。</li>
-     <li><strong>編譯器 (compiler)</strong>:把重新編輯好的檔案再轉交給 compiler 編譯成<strong>組合語言 (assembly language)</strong>，簡稱<strong>組語</strong>。而使用組語的最重要的原因是不同的高階程式語言都可以組譯成相同的組語，也比機器碼還好 debug。 p.s. 組語是因硬體架構而異。</li>
-     <li><strong>組譯器 (assembler)</strong>: 將組語轉譯為<strong>機械碼 (machine code)</strong>，並打包成重新定位的<strong>目標檔 (object file)</strong>。</li>
-     <li><strong>連結器 (linker)</strong>: 負責合併所有 object files 並產生可執行的檔案，可以被加載到記憶體執行。</li>
+<li><strong>預處理 (preprocessor)</strong>: 負責在引用 header file、libraries 的檔案插入完整的程式碼，以 C 為例就是根據 <code>#</code> 開頭的指令，e.g., <code>#include stdio.h</code>，直接插入 stdio.h 的內容。</li>
+<li><strong>編譯器 (compiler)</strong>: 把重新編輯好的檔案再轉交給 compiler 編譯成<strong>組合語言 (assembly language)<strong>，簡稱</strong>組語</strong>。而使用組語的最重要的原因是不同的高階程式語言都可以組譯成相同的組語，也比機器碼還好 debug。 p.s. 組語是因硬體架構而異。</li>
+<li><strong>組譯器 (assembler)</strong>: 將組語轉譯為**機械碼 (machine code)**，並打包成重新定位的 **目標檔 (object file)**。</li>
+<li><strong>連結器 (linker)</strong>: 負責合併所有 object files 並產生可執行的檔案，可以被加載到記憶體執行。</li>
 </ol>
-<p style="text-align: left;"> 我們再把流程畫成下圖：</p>
+<p>我們再把流程畫成下圖：</p>
+<figure>
+    <img title="編譯系統" src="https://i.imgur.com/N8Wu8vv.png" alt="" width="292" height="702" />
+    <figcaption style="text-align:center">編譯系統</figcaption>
+</figure>
 
-
-<p>[caption id=”” align=”aligncenter” width=”292”]<img title="編譯系統" src="https://i.imgur.com/N8Wu8vv.png" alt="" width="292" height="702" /> 編譯系統[/caption]</p>
-<p>&nbsp;</p>
-<p>到目前為止，我們對編譯器以及編譯系統就有初步的了解了！]]&gt;</content:encoded></p>
+<p>到目前為止，我們對編譯器以及編譯系統就有初步的了解了！</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jkrvivian.github.io/2018/01/30/compiler-intro-1-md/" data-id="ckncx6hyu0001ed4w91xa9djr" data-title="噢！我的編譯器 - Introduction I" class="article-share-link">Teilen</a>
+      <a data-url="http://jkrvivian.github.io/2018/01/30/compiler-intro-1-md/" data-id="ckncxsr4y0000pr4wddigf2y2" data-title="噢！我的編譯器 - Introduction I" class="article-share-link">Teilen</a>
       
       
       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/compiler/" rel="tag">compiler</a></li></ul>
+
     </footer>
   </div>
   
@@ -231,7 +194,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jkrvivian.github.io/2018/01/27/tokio-hotel-md/" data-id="ckncx6hyx0002ed4w8p76bmjr" data-title="德國天團 Tokio Hotel" class="article-share-link">Teilen</a>
+      <a data-url="http://jkrvivian.github.io/2018/01/27/tokio-hotel-md/" data-id="ckncxsr550001pr4w24dmaxmr" data-title="德國天團 Tokio Hotel" class="article-share-link">Teilen</a>
       
       
       
@@ -258,7 +221,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/music/" rel="tag">music</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/compiler/" rel="tag">compiler</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/music/" rel="tag">music</a></li></ul>
     </div>
   </div>
 
@@ -268,7 +231,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/music/" style="font-size: 10px;">music</a>
+      <a href="/tags/compiler/" style="font-size: 10px;">compiler</a> <a href="/tags/music/" style="font-size: 10px;">music</a>
     </div>
   </div>
 
@@ -277,7 +240,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archiv</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">April 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li></ul>
     </div>
   </div>
 
@@ -288,10 +251,6 @@
     <h3 class="widget-title">letzter Beitrag</h3>
     <div class="widget">
       <ul>
-        
-          <li>
-            <a href="/2021/04/11/hello-world/">Hello World</a>
-          </li>
         
           <li>
             <a href="/2018/01/30/compiler-intro-1-md/">噢！我的編譯器 - Introduction I</a>
