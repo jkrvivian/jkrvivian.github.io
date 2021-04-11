@@ -71,6 +71,84 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-compiler-lexical-detail" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2018/04/03/compiler-lexical-detail/" class="article-date">
+  <time class="dt-published" datetime="2018-04-03T08:05:51.000Z" itemprop="datePublished">2018-04-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2018/04/03/compiler-lexical-detail/">噢！我的編譯器 – Lexical Analysis Detail</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>大致上了解 lexical analyzer 做了什麼之後，我們可以再更進一步看細節：</p>
+<ul>
+     <li>字串怎麼讀？</li>
+     <li>字串怎麼切？</li>
+     <li>token class 怎麼定義？</li>
+</ul>
+
+<h4>字串怎麼讀？</h4>
+當專案很大，程式碼很多時，讀取速度當然就愈慢 。因此，讀程式碼時就不是一個字元一個字元慢慢讀了，而是一次抓取多個字元放進緩存的 buffer 中。畢竟和 disk 拿取資料， 系統呼叫的成本是很高的呢！於是每次拿取的資料的單位就與 disk block 大小一致，如果檔案沒那麼大的話，就會在最後面加一個特殊的結尾字符，一般稱之為 eof (end of file)。
+
+<p>所以當遇到 eof 時，就知道要更新 buffer，拿下一段的程式碼了。</p>
+<h4>字串怎麼切？</h4>
+有了 input stream 後，要切。但怎麼知道這一刀要下在哪裡？怎麼記住每一段的範圍呢？
+
+<p>龍書中提到使用兩個標記標住起點與終點：lexemeBegin, forward。</p>
+<p>想法很簡單：</p>
+<p>由 forward 不斷前進，找到符合規則的 token 後就記錄下來，更新 lexemeBegin，然後再重複直到結束。</p>
+<h4>token class 怎麼定義？</h4>
+這個部份就是利用 lex 或 bison 實做 scanner 的重頭戲。如何訂一條規則，描述出這個 token 的 pattern 呢？
+
+<p>這就需要 <strong><span style="color: #ff6600;">RE (regular expression)</span></strong> 出場了！所謂的 regular expression 其實就是透過定義一些符號試圖精簡的表示以個語句的規則，這個的應用場合非常廣泛，如在很多「搜尋」的場景都能夠使用 RE 過濾出目標。</p>
+<p>詳細的 RE 語法可以參照 <a target="_blank" rel="noopener" href="https://atedev.wordpress.com/2007/11/23/%E6%AD%A3%E8%A6%8F%E8%A1%A8%E7%A4%BA%E5%BC%8F-regular-expression/">正規表達式 Regular Expression</a></p>
+<p>在龍書中還提到了在建構 lexical analyzer 時，會先把 regular expression 轉換成<span style="color: #ff6600;"><strong>狀態轉移圖</strong></span>表示 <span style="color: #ff6600;"><strong>(transition diagram)</strong><span style="color: #000000;">，為的是能建構一連串的判斷動作，如圖：</span></span></p>
+<figure>
+    <img class="size-medium" src="https://cs.nyu.edu/~gottlieb/courses/2000s/2007-08-fall/compilers/lectures/diagrams/trans-dia-num.png" alt="unsigned number transition diagram" width="999" height="290" /> 
+    <figcaption style="text-align:center">unsigned number transition diagram</figcaption>
+</figure>
+
+<p>每一個原圈代表一個狀態，當走到<strong>雙圈</strong>時就代表<strong>最終</strong>狀態且是被<strong>接受</strong>的！而每一條箭頭稱為 edge，代表在狀態 a 且遇到 edge 上的字元時前進到箭頭指向的狀態 b。例如：在 state13 時，遇到 E 即前進到 state16。</p>
+<p>也就是說每一個 token 都會轉成不同的 transition diagram，我們便可以把這張圖轉換成以 switch case 的程式碼，如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">TOKEN getRelop()                        &#x2F;&#x2F; TOKEN has two components</span><br><span class="line">    TOKEN retToken &#x3D; new(RELOP);          &#x2F;&#x2F; First component set here</span><br><span class="line">    while (true)</span><br><span class="line">       switch(state)</span><br><span class="line">         case 0: c &#x3D; nextChar();</span><br><span class="line">                 if (c &#x3D;&#x3D; &#39;&amp;lt;&#39;)      state &#x3D; 1;</span><br><span class="line">                 else if (c &#x3D;&#x3D; &#39;&#x3D;&#39;) state &#x3D; 5;</span><br><span class="line">                 else if (c &#x3D;&#x3D; &#39;&amp;gt;&#39;) state &#x3D; 6;</span><br><span class="line">                 else fail();</span><br><span class="line">                 break;</span><br><span class="line">         case 1: ...</span><br><span class="line">         ...</span><br><span class="line">         case 8: retract();  &#x2F;&#x2F; an accepting state with a star</span><br><span class="line">                 retToken.attribute &#x3D; GT;  &#x2F;&#x2F; second component</span><br><span class="line">                 return(retToken);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>&nbsp;</p>
+<h5>沒走到雙圈的最終狀態 == fail ?</h5>
+這答案是<span style="color: #ff6600;"><strong>不夠全面</strong></span>的，沒有走到雙圈並不代表這個字串是有誤，而是他不屬於這一個 token class 的。
+
+<p>因此會繼續以走下一個 token class 的 transition diagram，直到最終狀態。如果某個字串它能多個匹配不同 token class 的話，便會歸類給最先走成功的 token class。</p>
+<p>真正的 fail 是在於當所有 transition diagram 都走完且沒有任一匹配的時候，這時候 lexer 就會直接噴錯囉！</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://jkrvivian.github.io/2018/04/03/compiler-lexical-detail/" data-id="ckncyyhr40003934w4d75108q" data-title="噢！我的編譯器 – Lexical Analysis Detail" class="article-share-link">Teilen</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/compiler/" rel="tag">compiler</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-compiler-lexical-overview" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2018/02/22/compiler-lexical-overview/" class="article-date">
@@ -182,10 +260,12 @@ token 跟 lexeme 的解釋很相像，可以用 class 跟 instance 的關係更�
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jkrvivian.github.io/2018/02/22/compiler-lexical-overview/" data-id="ckncysug500034m4we1t57vri" data-title="噢！我的編譯器 - Lexical Analysis Overview" class="article-share-link">Teilen</a>
+      <a data-url="http://jkrvivian.github.io/2018/02/22/compiler-lexical-overview/" data-id="ckncyyhr50004934wdchma3ph" data-title="噢！我的編譯器 - Lexical Analysis Overview" class="article-share-link">Teilen</a>
       
       
       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/compiler/" rel="tag">compiler</a></li></ul>
+
     </footer>
   </div>
   
@@ -253,7 +333,7 @@ token 跟 lexeme 的解釋很相像，可以用 class 跟 instance 的關係更�
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jkrvivian.github.io/2018/02/02/compiler-intro-2/" data-id="ckncysug100014m4w61m51wdj" data-title="噢！我的編譯器 - Introduction II" class="article-share-link">Teilen</a>
+      <a data-url="http://jkrvivian.github.io/2018/02/02/compiler-intro-2/" data-id="ckncyyhr00001934wdtp6f9x0" data-title="噢！我的編譯器 - Introduction II" class="article-share-link">Teilen</a>
       
       
       
@@ -344,7 +424,7 @@ token 跟 lexeme 的解釋很相像，可以用 class 跟 instance 的關係更�
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jkrvivian.github.io/2018/01/30/compiler-intro-1/" data-id="ckncysufu00004m4wdtt32bpi" data-title="噢！我的編譯器 - Introduction I" class="article-share-link">Teilen</a>
+      <a data-url="http://jkrvivian.github.io/2018/01/30/compiler-intro-1/" data-id="ckncyyhqu0000934w8g8zdogr" data-title="噢！我的編譯器 - Introduction I" class="article-share-link">Teilen</a>
       
       
       
@@ -390,7 +470,7 @@ token 跟 lexeme 的解釋很相像，可以用 class 跟 instance 的關係更�
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jkrvivian.github.io/2018/01/27/tokio-hotel-md/" data-id="ckncysug600044m4w3jul81i0" data-title="德國天團 Tokio Hotel" class="article-share-link">Teilen</a>
+      <a data-url="http://jkrvivian.github.io/2018/01/27/tokio-hotel-md/" data-id="ckncyyhr60005934we3zg9u7c" data-title="德國天團 Tokio Hotel" class="article-share-link">Teilen</a>
       
       
       
@@ -436,7 +516,7 @@ token 跟 lexeme 的解釋很相像，可以用 class 跟 instance 的關係更�
   <div class="widget-wrap">
     <h3 class="widget-title">Archiv</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li></ul>
     </div>
   </div>
 
@@ -447,6 +527,10 @@ token 跟 lexeme 的解釋很相像，可以用 class 跟 instance 的關係更�
     <h3 class="widget-title">letzter Beitrag</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2018/04/03/compiler-lexical-detail/">噢！我的編譯器 – Lexical Analysis Detail</a>
+          </li>
         
           <li>
             <a href="/2018/02/22/compiler-lexical-overview/">噢！我的編譯器 - Lexical Analysis Overview</a>
