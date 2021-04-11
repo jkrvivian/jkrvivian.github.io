@@ -4,15 +4,25 @@
   <meta charset="utf-8">
   
   
-  <title>Jkrvivian&#39;s Blog</title>
+  <title>噢！我的編譯器 - Introduction I | Jkrvivian&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Jkrvivian&#39;s Blog">
-<meta property="og:url" content="http://jkrvivian.github.io/index.html">
+  <meta name="description" content="前言趁著這個寒假再趕緊複習近一年前選修過的 compiler，除了釐清整個架構流程與觀念，也期望能有對應的實做練習。其實只是下學期要當助教，得把這些東西撿回來 XD 之後的整理皆基於:  龍書 (Compilers principles, techniques, and tools) Stanford CS143 的開放式課程 自己的想法  希望能夠闡述的更輕鬆且容易理解，大致上就這樣，我們開始吧">
+<meta property="og:type" content="article">
+<meta property="og:title" content="噢！我的編譯器 - Introduction I">
+<meta property="og:url" content="http://jkrvivian.github.io/2018/01/30/compiler-intro-1-md/index.html">
 <meta property="og:site_name" content="Jkrvivian&#39;s Blog">
+<meta property="og:description" content="前言趁著這個寒假再趕緊複習近一年前選修過的 compiler，除了釐清整個架構流程與觀念，也期望能有對應的實做練習。其實只是下學期要當助教，得把這些東西撿回來 XD 之後的整理皆基於:  龍書 (Compilers principles, techniques, and tools) Stanford CS143 的開放式課程 自己的想法  希望能夠闡述的更輕鬆且容易理解，大致上就這樣，我們開始吧">
 <meta property="og:locale">
+<meta property="og:image" content="https://i.imgur.com/VoFfTlC.png">
+<meta property="og:image" content="https://i.imgur.com/mfg6GXG.png">
+<meta property="og:image" content="https://i.imgur.com/SUm3jVH.png">
+<meta property="og:image" content="https://i.imgur.com/6RnzT7T.png">
+<meta property="og:image" content="https://i.imgur.com/N8Wu8vv.png">
+<meta property="article:published_time" content="2018-01-29T16:46:17.000Z">
+<meta property="article:modified_time" content="2021-04-11T08:43:14.259Z">
 <meta property="article:author" content="Vivian Lin">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.imgur.com/VoFfTlC.png">
   
     <link rel="alternate" href="/atom.xml" title="Jkrvivian's Blog" type="application/atom+xml">
   
@@ -69,60 +79,7 @@
 </header>
 
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-hello-world" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2021/04/11/hello-world/" class="article-date">
-  <time class="dt-published" datetime="2021-04-11T07:34:23.588Z" itemprop="datePublished">2021-04-11</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/04/11/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://jkrvivian.github.io/2021/04/11/hello-world/" data-id="ckncx6hyo0000ed4w3a5y0968" data-title="Hello World" class="article-share-link">Teilen</a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-compiler-intro-1-md" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+        <section id="main"><article id="post-compiler-intro-1-md" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2018/01/30/compiler-intro-1-md/" class="article-date">
   <time class="dt-published" datetime="2018-01-29T16:46:17.000Z" itemprop="datePublished">2018-01-30</time>
@@ -135,8 +92,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2018/01/30/compiler-intro-1-md/">噢！我的編譯器 - Introduction I</a>
+    <h1 class="p-name article-title" itemprop="headline name">
+      噢！我的編譯器 - Introduction I
     </h1>
   
 
@@ -194,57 +151,28 @@
     </footer>
   </div>
   
-</article>
-
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-tokio-hotel-md" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2018/01/27/tokio-hotel-md/" class="article-date">
-  <time class="dt-published" datetime="2018-01-27T07:17:42.000Z" itemprop="datePublished">2018-01-27</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
+    <a href="/2021/04/11/hello-world/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Neuer</strong>
+      <div class="article-nav-title">
         
+          Hello World
+        
+      </div>
+    </a>
   
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2018/01/27/tokio-hotel-md/">德國天團 Tokio Hotel</a>
-    </h1>
   
+    <a href="/2018/01/27/tokio-hotel-md/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Älter</strong>
+      <div class="article-nav-title">德國天團 Tokio Hotel</div>
+    </a>
+  
+</nav>
 
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="最喜歡的樂團"><a href="#最喜歡的樂團" class="headerlink" title="最喜歡的樂團"></a>最喜歡的樂團</h2><p>Tokio Hotel 是一個由四個德國男孩所組成的樂團，小小年紀出道，在 2005 年以 <a target="_blank" rel="noopener" href="https://youtu.be/9BuaN2Pz0Ns">Durch den monsun</a> 走紅，紅遍歐洲各國，甚至颳起一陣學習德文的風潮。四位成員分別有 Bill Kaulitz (主唱)、Tom Kaulitz (吉他手)、Georg Listing (貝斯手)、Gustav Schäfer (鼓手)。我想最令人驚豔的是每張專輯曲目，幾乎是由 Bill 及 Tom 作詞作曲完成！如此年輕的樂團獲獎無數，最佳樂團、最佳專輯等等，並逐步打入歐美甚至亞洲市場。</p>
-<p>我國二的時候 Humanoid 中的 <a target="_blank" rel="noopener" href="https://youtu.be/WhIlqBqRtuw">Automatic</a> 登上了 Billboard 排行榜，也正是從那時開始認識 Tokio Hotel，並持續關注到現在，不知不覺八、九年就過去了！回想國高中時期，這個樂團影響我許多，學了一點德文，開始彈吉他都是因他們起，在考試壓力下聽著 <a target="_blank" rel="noopener" href="https://youtu.be/waXx9k7_2_0">Scream</a> 吼，難過時 <a target="_blank" rel="noopener" href="https://youtu.be/LujKFKcoHNg">Hilf mir fliegen</a> 就彷彿他們陪在我身邊，看著 Unplugged 版 <a target="_blank" rel="noopener" href="https://youtu.be/JWPDPKXk-bs">Reden</a> 的影片那燦爛的微笑，心情就漸漸跟著愉快起來。當然也不得不提這四位的同人小說也讓我走上一條不歸路。</p>
-<p>直到近兩張專輯，King of Suburbia 和 Dream Machine 引起了廣大討論，曲風有了大改變，不再是以前那麼單純的吉他、貝斯與鼓，而加了許多電音元素，就連 Bill 的唱法都有了不同。因此便有 Tokio Hotel 不再是以前的 Tokio Hotel 等負面評論出現。我想正是因為這個轉變，Dream Machine 才沒有代理商代理在台灣販售….。</p>
-<p>我們跟著 Tokio Hotel 成長，誰不是成長後對事物有不同的看法呢？曲，加了許多新的元素進去，對自己是突破，也更帶著聽眾認識了不一樣的音樂世界；詞，是他們的心情，對社會的觀察。在 Dream Machine 的採訪中，成員們很驕傲的說終於做了一張自己想做的專輯，且詞與曲一樣由 Bill 和 Tom 親寫親編。Tokio Hotel 確實變了，成熟了，對音樂有更多新的想法與見解，但不變的是他們對音樂的熱忱與要求。</p>
-<p>我依然喜歡他們的新作，更喜歡他們衷於自己，期待未來的作品中還能看到 Tokio Hotel 的不同樣貌。</p>
-<p><img src="http://www.dw.com/image/37994008_304.jpg" alt="Dream machine"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://jkrvivian.github.io/2018/01/27/tokio-hotel-md/" data-id="ckncx6hyx0002ed4w8p76bmjr" data-title="德國天團 Tokio Hotel" class="article-share-link">Teilen</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/music/" rel="tag">music</a></li></ul>
-
-    </footer>
-  </div>
   
 </article>
-
-
-
-  
 
 
 </section>
