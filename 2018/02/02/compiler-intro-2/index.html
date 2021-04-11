@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>噢！我的編譯器 - Introduction II | Jkrvivian&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="在上一篇 Introduction to Compiler - I 中簡述了編譯器的工作以及編譯系統的流程，接著我們將更深入的打開 compiler 的盒子，看看它到底是經過了哪些處理完成編譯的！ The Structure of a Compiler龍書裡面提到，我們可以將編譯器做的事情分為兩階段：  分析 (analysis): 又稱為 compiler 的 **前端處理 (front-end">
+<meta property="og:type" content="article">
+<meta property="og:title" content="噢！我的編譯器 - Introduction II">
+<meta property="og:url" content="http://jkrvivian.github.io/2018/02/02/compiler-intro-2/index.html">
+<meta property="og:site_name" content="Jkrvivian&#39;s Blog">
+<meta property="og:description" content="在上一篇 Introduction to Compiler - I 中簡述了編譯器的工作以及編譯系統的流程，接著我們將更深入的打開 compiler 的盒子，看看它到底是經過了哪些處理完成編譯的！ The Structure of a Compiler龍書裡面提到，我們可以將編譯器做的事情分為兩階段：  分析 (analysis): 又稱為 compiler 的 **前端處理 (front-end">
+<meta property="og:locale">
+<meta property="og:image" content="https://i.imgur.com/6wX3QzL.png">
+<meta property="article:published_time" content="2018-02-02T15:36:00.000Z">
+<meta property="article:modified_time" content="2021-04-11T09:12:43.556Z">
+<meta property="article:author" content="Vivian Lin">
+<meta property="article:tag" content="compiler">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.imgur.com/6wX3QzL.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Jkrvivian's Blog" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Jkrvivian&#39;s Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Suche"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://jkrvivian.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-compiler-intro-2" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2018/02/02/compiler-intro-2/" class="article-date">
+  <time class="dt-published" datetime="2018-02-02T15:36:00.000Z" itemprop="datePublished">2018-02-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      噢！我的編譯器 - Introduction II
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>在上一篇 <a href="https://jkrvivian.github.io/2018/01/30/compiler-intro-1-md/">Introduction to Compiler - I</a> 中簡述了編譯器的工作以及編譯系統的流程，接著我們將更深入的打開 compiler 的盒子，看看它到底是經過了哪些處理完成編譯的！</p>
+<h3 id="The-Structure-of-a-Compiler"><a href="#The-Structure-of-a-Compiler" class="headerlink" title="The Structure of a Compiler"></a>The Structure of a Compiler</h3><p>龍書裡面提到，我們可以將編譯器做的事情分為兩階段：</p>
+<ol>
+<li><strong>分析 (analysis)</strong>: 又稱為 compiler 的 **前端處理 (front-end)**，分析與解構原始碼，並將資訊整理成 <strong>中介表示 (intermediate representation)</strong> 與 <strong>符號表 (symbol table)</strong> 傳給下一階段，當中如果發現任何錯誤就會噴錯誤訊息</li>
+<li><strong>生成 (synthesis)</strong>: 又稱為 compiler 的 **後端處理 (back-end)**，根據符號表與中介表示產出目標程式碼</li>
+</ol>
+<p>套入翻譯的時候大腦快速運轉的流程也是說的通的，總是得對 A 語言的句子進行分析才能夠生成 B 語言的句子啊！例如，這幾學期學得很痛苦的法文 XD</p>
+<p>中文的「我起床了」是一句多麼直覺且精簡的表達一個動作，句型就是「主詞 + 動詞 + 語末助詞」，其實翻成英文也十分簡單，”I got up.”，一樣的句型構成，但有了過去式，畢竟起床這事兒已經發生了，反觀法文…….</p>
+<p>法文文法書有一課提到「反身」，相當於中文的「我自己」、「你自己」還有英文的 yourself、myself 。但法文不太一樣，有些動詞必須要用反身的句型，例如起床、洗臉、梳頭，因為是「我自己起的床」、「我自己梳的頭」。所以同樣的一句話在法文是 “Je me lève.” 而不是 “Je lève.”，因此看到這句絕對不要翻成「我自己起床」，而是「我起床了」，否則其他人一陣嘲笑就是你的錯誤訊息囉！<br>所以，勢必得對句子進行單字及文法 <strong>分析</strong>，我們才能 <strong>生成</strong> 準確的翻譯囉！學了他國語言總是覺得中文最簡單，但法文特別虐腦倒是真的 QAQ</p>
+<p>當然，我們還可以再把編譯器的工作從這兩大點再細分出來：</p>
+<ol>
+<li><strong><span style="color: #ff6600;">分析 (analysis)</span>:</strong><ul>
+<li>詞彙分析器 (lexical analyzer)，亦稱 scanner，建立 symbol table</li>
+<li>語法分析器 (syntax analyzer)，亦稱 parser</li>
+<li>語意分析器 (semantic analyzer)</li>
+<li>中間碼產生器 (intermediate code generator     </li>
+<li>程式碼最佳化 (code optimizer) <strong>(optional &amp; machine-independent)</strong></li>
+</ul>
+</li>
+<li><strong><span style="color: #ff6600;">生成 (synthesis)</span></strong>:<ul>
+<li>程式碼產生器 (code generator)</li>
+<li>機械碼最佳化 (machine-independent code optimizer) <strong>(optional &amp; machine-independent)</strong></li>
+</ul>
+</li>
+</ol>
+<p>流程圖如下：</p>
+<p>因為 symbol table 在各個步驟都會使用到，因此把它獨立畫出來</p>
+<figure>
+    <img title="compile 的步驟" src="https://i.imgur.com/6wX3QzL.png" alt="" width="437" height="956" />
+    <figcaption style="text-align:center">compile 的步驟</figcaption>
+</figure>
+
+<p>先有個概觀，接下來我們就要把焦點移到各個步驟囉！</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://jkrvivian.github.io/2018/02/02/compiler-intro-2/" data-id="ckncyeb1e0000f84w69zegd0x" data-title="噢！我的編譯器 - Introduction II" class="article-share-link">Teilen</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/compiler/" rel="tag">compiler</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/01/30/compiler-intro-1/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Älter</strong>
+      <div class="article-nav-title">噢！我的編譯器 - Introduction I</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/compiler/" rel="tag">compiler</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/music/" rel="tag">music</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/compiler/" style="font-size: 20px;">compiler</a> <a href="/tags/music/" style="font-size: 10px;">music</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">letzter Beitrag</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/02/02/compiler-intro-2/">噢！我的編譯器 - Introduction II</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/30/compiler-intro-1/">噢！我的編譯器 - Introduction I</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/27/tokio-hotel-md/">德國天團 Tokio Hotel</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2021 Vivian Lin<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

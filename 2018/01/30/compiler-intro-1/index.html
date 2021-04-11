@@ -9,7 +9,7 @@
   <meta name="description" content="前言趁著這個寒假再趕緊複習近一年前選修過的 compiler，除了釐清整個架構流程與觀念，也期望能有對應的實做練習。其實只是下學期要當助教，得把這些東西撿回來 XD 之後的整理皆基於:  龍書 (Compilers principles, techniques, and tools) Stanford CS143 的開放式課程 自己的想法  希望能夠闡述的更輕鬆且容易理解，大致上就這樣，我們開始吧">
 <meta property="og:type" content="article">
 <meta property="og:title" content="噢！我的編譯器 - Introduction I">
-<meta property="og:url" content="http://jkrvivian.github.io/2018/01/30/compiler-intro-1-md/index.html">
+<meta property="og:url" content="http://jkrvivian.github.io/2018/01/30/compiler-intro-1/index.html">
 <meta property="og:site_name" content="Jkrvivian&#39;s Blog">
 <meta property="og:description" content="前言趁著這個寒假再趕緊複習近一年前選修過的 compiler，除了釐清整個架構流程與觀念，也期望能有對應的實做練習。其實只是下學期要當助教，得把這些東西撿回來 XD 之後的整理皆基於:  龍書 (Compilers principles, techniques, and tools) Stanford CS143 的開放式課程 自己的想法  希望能夠闡述的更輕鬆且容易理解，大致上就這樣，我們開始吧">
 <meta property="og:locale">
@@ -19,7 +19,7 @@
 <meta property="og:image" content="https://i.imgur.com/6RnzT7T.png">
 <meta property="og:image" content="https://i.imgur.com/N8Wu8vv.png">
 <meta property="article:published_time" content="2018-01-29T16:46:17.000Z">
-<meta property="article:modified_time" content="2021-04-11T09:00:30.816Z">
+<meta property="article:modified_time" content="2021-04-11T09:17:13.006Z">
 <meta property="article:author" content="Vivian Lin">
 <meta property="article:tag" content="compiler">
 <meta name="twitter:card" content="summary">
@@ -80,9 +80,9 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-compiler-intro-1-md" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+        <section id="main"><article id="post-compiler-intro-1" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2018/01/30/compiler-intro-1-md/" class="article-date">
+    <a href="/2018/01/30/compiler-intro-1/" class="article-date">
   <time class="dt-published" datetime="2018-01-29T16:46:17.000Z" itemprop="datePublished">2018-01-30</time>
 </a>
     
@@ -157,7 +157,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jkrvivian.github.io/2018/01/30/compiler-intro-1-md/" data-id="ckncxsr4y0000pr4wddigf2y2" data-title="噢！我的編譯器 - Introduction I" class="article-share-link">Teilen</a>
+      <a data-url="http://jkrvivian.github.io/2018/01/30/compiler-intro-1/" data-id="ckncyeb1o0003f84wds5o1e3s" data-title="噢！我的編譯器 - Introduction I" class="article-share-link">Teilen</a>
       
       
       
@@ -168,6 +168,15 @@
   
     
 <nav id="article-nav">
+  
+    <a href="/2018/02/02/compiler-intro-2/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Neuer</strong>
+      <div class="article-nav-title">
+        
+          噢！我的編譯器 - Introduction II
+        
+      </div>
+    </a>
   
   
     <a href="/2018/01/27/tokio-hotel-md/" id="article-nav-older" class="article-nav-link-wrap">
@@ -202,7 +211,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/compiler/" style="font-size: 10px;">compiler</a> <a href="/tags/music/" style="font-size: 10px;">music</a>
+      <a href="/tags/compiler/" style="font-size: 20px;">compiler</a> <a href="/tags/music/" style="font-size: 10px;">music</a>
     </div>
   </div>
 
@@ -211,7 +220,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archiv</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li></ul>
     </div>
   </div>
 
@@ -224,7 +233,11 @@
       <ul>
         
           <li>
-            <a href="/2018/01/30/compiler-intro-1-md/">噢！我的編譯器 - Introduction I</a>
+            <a href="/2018/02/02/compiler-intro-2/">噢！我的編譯器 - Introduction II</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/30/compiler-intro-1/">噢！我的編譯器 - Introduction I</a>
           </li>
         
           <li>
