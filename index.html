@@ -71,6 +71,102 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-ubuntu-firefox-video" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2020/04/09/ubuntu-firefox-video/" class="article-date">
+  <time class="dt-published" datetime="2020-04-09T12:07:19.000Z" itemprop="datePublished">2020-04-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2020/04/09/ubuntu-firefox-video/">Ubuntu Firefox 無法播放 Youtube 影片</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3>問題</h3>
+<!-- /wp:heading -->
+
+<!-- wp:tadv/classic-paragraph -->
+<ul>
+<li>作業系統： Ubuntu 18.04 LTS</li>
+<li>Firefox version: 75.0</li>
+</ul>
+<p>只有在看直播影片時會有以下錯誤，但聊天室正常運作：</p>
+<!-- /wp:tadv/classic-paragraph -->
+
+<!-- wp:image {"id":353,"sizeSlug":"large"} -->
+<figure class="wp-block-image size-large"><img src="https://jkrvivian.com/blog/wp-content/uploads/2020/04/Screenshot-from-2020-04-09-19-53-01.png" alt="" class="wp-image-353"/></figure>
+<!-- /wp:image -->
+
+<!-- wp:tadv/classic-paragraph -->
+<p>由於這是目前最新版的 Firefox，所以是支援所有格式的。因此在 https://www.youtube.com/html5 測試得到成功訊息：</p>
+<!-- /wp:tadv/classic-paragraph -->
+
+<!-- wp:gallery {"ids":[354]} -->
+<img src="https://user-images.githubusercontent.com/11289354/114311648-2bbe0980-9b22-11eb-93ae-302a599b0345.png" alt="" data-id="354" />
+<!-- /wp:gallery -->
+
+<!-- wp:heading {"level":3} -->
+<h3>解決</h3>
+<!-- /wp:heading -->
+
+<!-- wp:tadv/classic-paragraph -->
+<p>剛開始沒加上<span style="color: #ff6600;"><strong> Ubuntu</strong></span> 這個關鍵字，因此一直繞在設定 about:config 的內容或者是安裝 flash 外掛程式，但兩者都無法解決問題。</p>
+<p>加上 <span style="color: #ff6600;"><strong>Ubuntu</strong></span> 搜尋後就有答案啦 QQ</p>
+<p>安裝 ubuntu-restricted-extras 套件，此套件含有：</p>
+<ul>
+<li>Support for MP3 and unencrypted DVD playback</li>
+<li>Microsoft TrueType core fonts</li>
+<li>Flash plugin</li>
+<li>codecs for common audio and video files</li>
+</ul>
+<!-- /wp:tadv/classic-paragraph -->
+
+<!-- wp:shortcode -->
+<p>$ sudo apt-get install ubuntu-restricted-extras</p>
+<!-- /wp:shortcode -->
+
+<!-- wp:tadv/classic-paragraph -->
+<p>安裝時需要閱讀並同意 License，都確認後就等待安裝。</p>
+<p>最後再重啟 Firefox，就可以看直播啦！</p>
+<!-- /wp:tadv/classic-paragraph -->
+
+<!-- wp:heading {"level":4} -->
+<h4>References:</h4>
+<!-- /wp:heading -->
+
+<!-- wp:tadv/classic-paragraph -->
+<ul>
+<li><a target="_blank" rel="noopener" href="https://askubuntu.com/questions/475351/firefox-html5-video-support">Firefox html5 video support</a></li>
+<li><a target="_blank" rel="noopener" href="https://ubuntuqa.com/zh-tw/article/2468.html">如何安裝ubuntu-restricted-extras包？</a></li>
+</ul>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://jkrvivian.github.io/2020/04/09/ubuntu-firefox-video/" data-id="ckndcvghg000h794wbtxvdkpg" data-title="Ubuntu Firefox 無法播放 Youtube 影片" class="article-share-link">Teilen</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ubuntu/" rel="tag">ubuntu</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-gpg-sign" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2020/03/28/gpg-sign/" class="article-date">
@@ -312,7 +408,7 @@ $ git log --show-signature -1    // 查看剛簽章的 commit</pre>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jkrvivian.github.io/2020/03/28/gpg-sign/" data-id="ckndco30z0008wu4wbky752ij" data-title="GitHub - Sign Commits With Your GPG Key" class="article-share-link">Teilen</a>
+      <a data-url="http://jkrvivian.github.io/2020/03/28/gpg-sign/" data-id="ckndcvgh90008794w6bmvbbl4" data-title="GitHub - Sign Commits With Your GPG Key" class="article-share-link">Teilen</a>
       
       
       
@@ -431,7 +527,7 @@ $ git log --show-signature -1    // 查看剛簽章的 commit</pre>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jkrvivian.github.io/2019/06/08/iota-intern-interview/" data-id="ckndco310000awu4whgtha1yc" data-title="IOTA Foundation Research Intern (Remote) Interview" class="article-share-link">Teilen</a>
+      <a data-url="http://jkrvivian.github.io/2019/06/08/iota-intern-interview/" data-id="ckndcvgha000a794wgfs9htmn" data-title="IOTA Foundation Research Intern (Remote) Interview" class="article-share-link">Teilen</a>
       
       
       
@@ -491,7 +587,7 @@ $ git log --show-signature -1    // 查看剛簽章的 commit</pre>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jkrvivian.github.io/2018/06/03/ubuntu-vscode-install/" data-id="ckndco316000hwu4wcufmej8n" data-title="Ubuntu 18.04 安裝 Visual Studio Code" class="article-share-link">Teilen</a>
+      <a data-url="http://jkrvivian.github.io/2018/06/03/ubuntu-vscode-install/" data-id="ckndcvghh000i794wcgvt36uy" data-title="Ubuntu 18.04 安裝 Visual Studio Code" class="article-share-link">Teilen</a>
       
       
       
@@ -608,7 +704,7 @@ GRUB_TIMEOUT_STYLE=menu</code></pre>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jkrvivian.github.io/2018/05/05/dual-system/" data-id="ckndco30w0005wu4w9pmgb4mn" data-title="雙系統 -- Windows 7 &amp; Ubuntu 18.04 LTS" class="article-share-link">Teilen</a>
+      <a data-url="http://jkrvivian.github.io/2018/05/05/dual-system/" data-id="ckndcvgh60005794w65zt98le" data-title="雙系統 -- Windows 7 &amp; Ubuntu 18.04 LTS" class="article-share-link">Teilen</a>
       
       
       
@@ -686,7 +782,7 @@ GRUB_TIMEOUT_STYLE=menu</code></pre>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jkrvivian.github.io/2018/04/03/compiler-lexical-detail/" data-id="ckndco30u0003wu4w5xqkbqax" data-title="噢！我的編譯器 – Lexical Analysis Detail" class="article-share-link">Teilen</a>
+      <a data-url="http://jkrvivian.github.io/2018/04/03/compiler-lexical-detail/" data-id="ckndcvgh40003794wfxn7elx5" data-title="噢！我的編譯器 – Lexical Analysis Detail" class="article-share-link">Teilen</a>
       
       
       
@@ -731,7 +827,7 @@ GRUB_TIMEOUT_STYLE=menu</code></pre>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jkrvivian.github.io/2018/03/30/my-2-double/" data-id="ckndco312000dwu4w6fd580gn" data-title="代表我的兩個 Double" class="article-share-link">Teilen</a>
+      <a data-url="http://jkrvivian.github.io/2018/03/30/my-2-double/" data-id="ckndcvghc000d794wca59dupp" data-title="代表我的兩個 Double" class="article-share-link">Teilen</a>
       
       
       
@@ -856,7 +952,7 @@ token 跟 lexeme 的解釋很相像，可以用 class 跟 instance 的關係更�
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jkrvivian.github.io/2018/02/22/compiler-lexical-overview/" data-id="ckndco30v0004wu4w09ci9awz" data-title="噢！我的編譯器 - Lexical Analysis Overview" class="article-share-link">Teilen</a>
+      <a data-url="http://jkrvivian.github.io/2018/02/22/compiler-lexical-overview/" data-id="ckndcvgh50004794w9o042khp" data-title="噢！我的編譯器 - Lexical Analysis Overview" class="article-share-link">Teilen</a>
       
       
       
@@ -929,7 +1025,7 @@ token 跟 lexeme 的解釋很相像，可以用 class 跟 instance 的關係更�
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jkrvivian.github.io/2018/02/02/compiler-intro-2/" data-id="ckndco30q0001wu4w3n3pes5c" data-title="噢！我的編譯器 - Introduction II" class="article-share-link">Teilen</a>
+      <a data-url="http://jkrvivian.github.io/2018/02/02/compiler-intro-2/" data-id="ckndcvgh00001794w6moh6l3y" data-title="噢！我的編譯器 - Introduction II" class="article-share-link">Teilen</a>
       
       
       
@@ -1020,7 +1116,7 @@ token 跟 lexeme 的解釋很相像，可以用 class 跟 instance 的關係更�
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jkrvivian.github.io/2018/01/30/compiler-intro-1/" data-id="ckndco30k0000wu4w9nxqdnhu" data-title="噢！我的編譯器 - Introduction I" class="article-share-link">Teilen</a>
+      <a data-url="http://jkrvivian.github.io/2018/01/30/compiler-intro-1/" data-id="ckndcvggu0000794w8jpr8gyf" data-title="噢！我的編譯器 - Introduction I" class="article-share-link">Teilen</a>
       
       
       
@@ -1034,53 +1130,12 @@ token 跟 lexeme 的解釋很相像，可以用 class 跟 instance 的關係更�
 
 
   
-    <article id="post-tokio-hotel-md" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2018/01/27/tokio-hotel-md/" class="article-date">
-  <time class="dt-published" datetime="2018-01-27T07:17:42.000Z" itemprop="datePublished">2018-01-27</time>
-</a>
+
+
+  <nav id="page-nav">
     
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2018/01/27/tokio-hotel-md/">德國天團 Tokio Hotel</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="最喜歡的樂團"><a href="#最喜歡的樂團" class="headerlink" title="最喜歡的樂團"></a>最喜歡的樂團</h2><p>Tokio Hotel 是一個由四個德國男孩所組成的樂團，小小年紀出道，在 2005 年以 <a target="_blank" rel="noopener" href="https://youtu.be/9BuaN2Pz0Ns">Durch den monsun</a> 走紅，紅遍歐洲各國，甚至颳起一陣學習德文的風潮。四位成員分別有 Bill Kaulitz (主唱)、Tom Kaulitz (吉他手)、Georg Listing (貝斯手)、Gustav Schäfer (鼓手)。我想最令人驚豔的是每張專輯曲目，幾乎是由 Bill 及 Tom 作詞作曲完成！如此年輕的樂團獲獎無數，最佳樂團、最佳專輯等等，並逐步打入歐美甚至亞洲市場。</p>
-<p>我國二的時候 Humanoid 中的 <a target="_blank" rel="noopener" href="https://youtu.be/WhIlqBqRtuw">Automatic</a> 登上了 Billboard 排行榜，也正是從那時開始認識 Tokio Hotel，並持續關注到現在，不知不覺八、九年就過去了！回想國高中時期，這個樂團影響我許多，學了一點德文，開始彈吉他都是因他們起，在考試壓力下聽著 <a target="_blank" rel="noopener" href="https://youtu.be/waXx9k7_2_0">Scream</a> 吼，難過時 <a target="_blank" rel="noopener" href="https://youtu.be/LujKFKcoHNg">Hilf mir fliegen</a> 就彷彿他們陪在我身邊，看著 Unplugged 版 <a target="_blank" rel="noopener" href="https://youtu.be/JWPDPKXk-bs">Reden</a> 的影片那燦爛的微笑，心情就漸漸跟著愉快起來。當然也不得不提這四位的同人小說也讓我走上一條不歸路。</p>
-<p>直到近兩張專輯，King of Suburbia 和 Dream Machine 引起了廣大討論，曲風有了大改變，不再是以前那麼單純的吉他、貝斯與鼓，而加了許多電音元素，就連 Bill 的唱法都有了不同。因此便有 Tokio Hotel 不再是以前的 Tokio Hotel 等負面評論出現。我想正是因為這個轉變，Dream Machine 才沒有代理商代理在台灣販售….。</p>
-<p>我們跟著 Tokio Hotel 成長，誰不是成長後對事物有不同的看法呢？曲，加了許多新的元素進去，對自己是突破，也更帶著聽眾認識了不一樣的音樂世界；詞，是他們的心情，對社會的觀察。在 Dream Machine 的採訪中，成員們很驕傲的說終於做了一張自己想做的專輯，且詞與曲一樣由 Bill 和 Tom 親寫親編。Tokio Hotel 確實變了，成熟了，對音樂有更多新的想法與見解，但不變的是他們對音樂的熱忱與要求。</p>
-<p>我依然喜歡他們的新作，更喜歡他們衷於自己，期待未來的作品中還能看到 Tokio Hotel 的不同樣貌。</p>
-<p><img src="http://www.dw.com/image/37994008_304.jpg" alt="Dream machine"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://jkrvivian.github.io/2018/01/27/tokio-hotel-md/" data-id="ckndco314000ewu4w2w5u0js8" data-title="德國天團 Tokio Hotel" class="article-share-link">Teilen</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/music/" rel="tag">music</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">weiter &raquo;</a>
+  </nav>
 
 </section>
         
@@ -1112,7 +1167,7 @@ token 跟 lexeme 的解釋很相像，可以用 class 跟 instance 的關係更�
   <div class="widget-wrap">
     <h3 class="widget-title">Archiv</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li></ul>
     </div>
   </div>
 
@@ -1123,6 +1178,10 @@ token 跟 lexeme 的解釋很相像，可以用 class 跟 instance 的關係更�
     <h3 class="widget-title">letzter Beitrag</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2020/04/09/ubuntu-firefox-video/">Ubuntu Firefox 無法播放 Youtube 影片</a>
+          </li>
         
           <li>
             <a href="/2020/03/28/gpg-sign/">GitHub - Sign Commits With Your GPG Key</a>
@@ -1138,10 +1197,6 @@ token 跟 lexeme 的解釋很相像，可以用 class 跟 instance 的關係更�
         
           <li>
             <a href="/2018/05/05/dual-system/">雙系統 -- Windows 7 &amp; Ubuntu 18.04 LTS</a>
-          </li>
-        
-          <li>
-            <a href="/2018/04/03/compiler-lexical-detail/">噢！我的編譯器 – Lexical Analysis Detail</a>
           </li>
         
       </ul>
