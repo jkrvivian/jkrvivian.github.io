@@ -71,6 +71,66 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-ubuntu-vscode-install" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2018/06/03/ubuntu-vscode-install/" class="article-date">
+  <time class="dt-published" datetime="2018-06-03T05:54:45.000Z" itemprop="datePublished">2018-06-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2018/06/03/ubuntu-vscode-install/">Ubuntu 18.04 安裝 Visual Studio Code</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>在 18.04 上安裝 VS Code 並不如先前版本一樣一行指令順利安裝，而是會再需要安裝相依性的套件，其實跟著提示的建議指令就能順利裝起來了。所以不需要緊張 XD</p>
+<h6>1. 下載 VS Code 安裝包</h6>
+至<a target="_blank" rel="noopener" href="https://code.visualstudio.com/download">官網載點</a>選擇 .deb 下載
+
+<h6>2. 安裝指令</h6>
+打開終端機後進到 .deb 的目錄下，執行
+
+<p><code>$sudo dpkg -i [vs code 檔名].deb</code></p>
+<h6>3. 相依性套件</h6>
+接著就會出現許多相依性套件為安裝的訊息，根據提示指令下載相依性套件：
+
+<p><code>$sudo apt install [欠缺的套件]</code></p>
+<p>也有可能再出現相依問題，因此再接著依提示輸入</p>
+<p><code>sudo apt --fix-broken install</code></p>
+<p>最後重行裝回 vs code 所欠缺的套件</p>
+<p><code>$sudo apt install [欠缺的套件]</code></p>
+<h6>4. 成功安裝 VS Code</h6>
+解決相依性套件的問後，進行 vs code 安裝就完成囉！
+
+<p><code>$sudo dpkg -i [vs code 檔名].deb</code></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://jkrvivian.github.io/2018/06/03/ubuntu-vscode-install/" data-id="cknd0hghb000dj84w7jvyaod4" data-title="Ubuntu 18.04 安裝 Visual Studio Code" class="article-share-link">Teilen</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ubuntu/" rel="tag">ubuntu</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-dual-system" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2018/05/05/dual-system/" class="article-date">
@@ -174,7 +234,7 @@ GRUB_TIMEOUT_STYLE=menu</code></pre>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jkrvivian.github.io/2018/05/05/dual-system/" data-id="cknd0dgka0005ej4wg0asck09" data-title="雙系統 -- Windows 7 &amp; Ubuntu 18.04 LTS" class="article-share-link">Teilen</a>
+      <a data-url="http://jkrvivian.github.io/2018/05/05/dual-system/" data-id="cknd0hgh40005j84w7p6s03it" data-title="雙系統 -- Windows 7 &amp; Ubuntu 18.04 LTS" class="article-share-link">Teilen</a>
       
       
       
@@ -252,7 +312,7 @@ GRUB_TIMEOUT_STYLE=menu</code></pre>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jkrvivian.github.io/2018/04/03/compiler-lexical-detail/" data-id="cknd0dgk90004ej4w4ky13d2e" data-title="噢！我的編譯器 – Lexical Analysis Detail" class="article-share-link">Teilen</a>
+      <a data-url="http://jkrvivian.github.io/2018/04/03/compiler-lexical-detail/" data-id="cknd0hgh20004j84wh5zxahjq" data-title="噢！我的編譯器 – Lexical Analysis Detail" class="article-share-link">Teilen</a>
       
       
       
@@ -297,7 +357,7 @@ GRUB_TIMEOUT_STYLE=menu</code></pre>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jkrvivian.github.io/2018/03/30/my-2-double/" data-id="cknd0dgkm000eej4w0apj9q4d" data-title="代表我的兩個 Double" class="article-share-link">Teilen</a>
+      <a data-url="http://jkrvivian.github.io/2018/03/30/my-2-double/" data-id="cknd0hgh70008j84wbr07g9xt" data-title="代表我的兩個 Double" class="article-share-link">Teilen</a>
       
       
       
@@ -422,7 +482,7 @@ token 跟 lexeme 的解釋很相像，可以用 class 跟 instance 的關係更�
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jkrvivian.github.io/2018/02/22/compiler-lexical-overview/" data-id="cknd0dgk80003ej4w0axnaps9" data-title="噢！我的編譯器 - Lexical Analysis Overview" class="article-share-link">Teilen</a>
+      <a data-url="http://jkrvivian.github.io/2018/02/22/compiler-lexical-overview/" data-id="cknd0hgh10003j84wgpqke9i1" data-title="噢！我的編譯器 - Lexical Analysis Overview" class="article-share-link">Teilen</a>
       
       
       
@@ -495,7 +555,7 @@ token 跟 lexeme 的解釋很相像，可以用 class 跟 instance 的關係更�
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jkrvivian.github.io/2018/02/02/compiler-intro-2/" data-id="cknd0dgk40001ej4wau7ib9ri" data-title="噢！我的編譯器 - Introduction II" class="article-share-link">Teilen</a>
+      <a data-url="http://jkrvivian.github.io/2018/02/02/compiler-intro-2/" data-id="cknd0hggw0001j84w0ki2a1gx" data-title="噢！我的編譯器 - Introduction II" class="article-share-link">Teilen</a>
       
       
       
@@ -586,7 +646,7 @@ token 跟 lexeme 的解釋很相像，可以用 class 跟 instance 的關係更�
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jkrvivian.github.io/2018/01/30/compiler-intro-1/" data-id="cknd0dgjx0000ej4wgl8y5uzt" data-title="噢！我的編譯器 - Introduction I" class="article-share-link">Teilen</a>
+      <a data-url="http://jkrvivian.github.io/2018/01/30/compiler-intro-1/" data-id="cknd0hggp0000j84wamaqekjw" data-title="噢！我的編譯器 - Introduction I" class="article-share-link">Teilen</a>
       
       
       
@@ -632,7 +692,7 @@ token 跟 lexeme 的解釋很相像，可以用 class 跟 instance 的關係更�
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jkrvivian.github.io/2018/01/27/tokio-hotel-md/" data-id="cknd0dgkn000fej4w4b418fqj" data-title="德國天團 Tokio Hotel" class="article-share-link">Teilen</a>
+      <a data-url="http://jkrvivian.github.io/2018/01/27/tokio-hotel-md/" data-id="cknd0hgh9000aj84wgm6ca3wt" data-title="德國天團 Tokio Hotel" class="article-share-link">Teilen</a>
       
       
       
@@ -669,7 +729,7 @@ token 跟 lexeme 的解釋很相像，可以用 class 跟 instance 的關係更�
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/compiler/" style="font-size: 20px;">compiler</a> <a href="/tags/music/" style="font-size: 10px;">music</a> <a href="/tags/programming/" style="font-size: 10px;">programming</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a>
+      <a href="/tags/compiler/" style="font-size: 20px;">compiler</a> <a href="/tags/music/" style="font-size: 10px;">music</a> <a href="/tags/programming/" style="font-size: 10px;">programming</a> <a href="/tags/ubuntu/" style="font-size: 15px;">ubuntu</a>
     </div>
   </div>
 
@@ -678,7 +738,7 @@ token 跟 lexeme 的解釋很相像，可以用 class 跟 instance 的關係更�
   <div class="widget-wrap">
     <h3 class="widget-title">Archiv</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li></ul>
     </div>
   </div>
 
@@ -689,6 +749,10 @@ token 跟 lexeme 的解釋很相像，可以用 class 跟 instance 的關係更�
     <h3 class="widget-title">letzter Beitrag</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2018/06/03/ubuntu-vscode-install/">Ubuntu 18.04 安裝 Visual Studio Code</a>
+          </li>
         
           <li>
             <a href="/2018/05/05/dual-system/">雙系統 -- Windows 7 &amp; Ubuntu 18.04 LTS</a>
@@ -704,10 +768,6 @@ token 跟 lexeme 的解釋很相像，可以用 class 跟 instance 的關係更�
         
           <li>
             <a href="/2018/02/22/compiler-lexical-overview/">噢！我的編譯器 - Lexical Analysis Overview</a>
-          </li>
-        
-          <li>
-            <a href="/2018/02/02/compiler-intro-2/">噢！我的編譯器 - Introduction II</a>
           </li>
         
       </ul>
