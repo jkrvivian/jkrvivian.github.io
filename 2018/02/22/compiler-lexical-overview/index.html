@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>噢！我的編譯器 - Lexical Analysis Overview | Jkrvivian&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="前一篇 Introduction II 中我們提到編譯器主要的工作就是進行 分析 與 生成，而又可以再把工作細分為以下，本篇要討論的就是分析的第一步驟： 詞彙分析器 lexical analyzer 分析 (analysis):       詞彙分析器 (lexical analyzer)，亦稱 scanner，建立 symbol table      語法分析器 (syntax analyzer">
+<meta property="og:type" content="article">
+<meta property="og:title" content="噢！我的編譯器 - Lexical Analysis Overview">
+<meta property="og:url" content="http://jkrvivian.github.io/2018/02/22/compiler-lexical-overview/index.html">
+<meta property="og:site_name" content="Jkrvivian&#39;s Blog">
+<meta property="og:description" content="前一篇 Introduction II 中我們提到編譯器主要的工作就是進行 分析 與 生成，而又可以再把工作細分為以下，本篇要討論的就是分析的第一步驟： 詞彙分析器 lexical analyzer 分析 (analysis):       詞彙分析器 (lexical analyzer)，亦稱 scanner，建立 symbol table      語法分析器 (syntax analyzer">
+<meta property="og:locale">
+<meta property="article:published_time" content="2018-02-21T16:16:51.000Z">
+<meta property="article:modified_time" content="2021-04-11T09:28:22.712Z">
+<meta property="article:author" content="Vivian Lin">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Jkrvivian's Blog" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Jkrvivian&#39;s Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Suche"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://jkrvivian.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-compiler-lexical-overview" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2018/02/22/compiler-lexical-overview/" class="article-date">
+  <time class="dt-published" datetime="2018-02-21T16:16:51.000Z" itemprop="datePublished">2018-02-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      噢！我的編譯器 - Lexical Analysis Overview
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>前一篇 <a href="https://jkrvivian.github.io/2018/02/02/compiler-intro-2/">Introduction II</a> 中我們提到編譯器主要的工作就是進行 <strong>分析</strong> 與 <strong>生成</strong>，而又可以再把工作細分為以下，本篇要討論的就是分析的第一步驟： <strong>詞彙分析器 lexical analyzer</strong></p>
+<p><strong><span style="color: #000000;">分析 (analysis)</span>:</strong></p>
+<ul>
+     <li><strong><span style="color: #ff0000;">詞彙分析器 (lexical analyzer)，亦稱 scanner，建立 symbol table</span></strong></li>
+     <li>語法分析器 (syntax analyzer)，亦稱 parser</li>
+     <li>語意分析器 (semantic analyzer)</li>
+     <li>中間碼產生器 (intermediate code generator)</li>
+     <li>程式碼最佳化 (code optimizer) <strong>(optional &amp; machine-independent)</strong></li>
+</ul>
+
+<h4>Lexical analyzer 做了什麼？</h4>
+lexical analyzer 是第一個拿到原始碼的，那它要做什麼呢？
+
+<p>就是<strong>判斷詞性</strong>囉！除了<strong>斷詞</strong>還需要做<strong>分類</strong>，那怎麼樣叫做斷詞呢？</p>
+<p>舉個簡單的例子，<code>a = b + 2;</code>，我們可以拆成以下，也就是進行<strong>斷詞</strong>：</p>
+<ul>
+     <li>a</li>
+     <li>=</li>
+     <li>b</li>
+     <li>+</li>
+     <li>2</li>
+     <li>;</li>
+</ul>
+除了會除去空白，還有 Tab 鍵、註解、換行符號等等。另外，也同時根據換行符號得知行號，以做錯誤訊息與程式碼的對應。那<strong>分類</strong>呢？請見以下：
+<ul>
+     <li>a : <span style="color: #ff6600;">identifier</span></li>
+     <li>= :<span style="color: #ff6600;"> assign</span></li>
+     <li>b : <span style="color: #ff6600;">identifier</span></li>
+     <li>+ :<span style="color: #ff6600;"> plus</span></li>
+     <li>2 : <span style="color: #ff6600;">number</span></li>
+     <li>; : <span style="color: #ff6600;">semicolon</span></li>
+</ul>
+而遇到 identifier 時，就會把相關資訊插入 symbol table，所以現在 symbol table 會有 a, b, c 的資訊。
+
+<p>以上就是 lexical analyzer 所做的事情，接下來便會把整理好的資訊與 symbol table 提供給下一個 syntax analyzer 使用。</p>
+<h4>token, pattern 和 lexeme</h4>
+有了基本概念後，先介紹三個名詞：
+<ul>
+     <li><strong>token</strong> : 類別及其屬性，以 &lt;token name,  optional attribute&gt; 表示，如 a 就是 &lt;id，pointer to symbol-table entry for a&gt;</li>
+     <li><strong>pattern</strong> : 每個類別的格式，如被歸類到 number 這個類別底下的都是數值格式，而 literal 就是被 "" 所環繞的字串</li>
+     <li><strong>lexeme</strong> : 類別底下的斷詞，如上述的 id 底下有 a, b, c 三個 lexeme</li>
+</ul>
+token 跟 lexeme 的解釋很相像，可以用 class 跟 instance 的關係更清楚的說明。token 就像是 class，token name 就是 class 的名稱。而 lexeme 就像是 instance，同 class 可以創造出許多不同的 instances ，同理，同一個 token 可以有很多 lexeme，而這些 lexeme 的不同之處就是 optional attribute，但他們都符合這個 token 的 pattern。當然這種種資訊都會被紀錄在 symbol table 中，以便後面的人接續使用。
+
+<p>看看下表更清楚了：</p>
+<table class=" aligncenter" style="width: 678px;">
+<tbody>
+<tr>
+<td style="width: 168px; text-align: center;"><span style="color: #ff6600;"><strong><span style="font-family: book\ antiqua, palatino, serif; font-size: 14pt;">token</span></strong></span></td>
+<td style="width: 409.733px; text-align: center;"><span style="color: #ff6600;"><strong><span style="font-family: book\ antiqua, palatino, serif; font-size: 14pt;">pattern</span></strong></span></td>
+<td style="width: 344.267px; text-align: center;"><span style="color: #ff6600;"><strong><span style="font-family: book\ antiqua, palatino, serif; font-size: 14pt;">sample lexeme</span></strong></span></td>
+</tr>
+<tr>
+<td style="width: 168px;"><strong>comparison</strong></td>
+<td style="width: 409.733px;">&lt; or &gt; or &lt;= or &gt;= or == or !=</td>
+<td style="width: 344.267px;">&lt;=, ==</td>
+</tr>
+<tr>
+<td style="width: 168px;"><strong>id</strong></td>
+<td style="width: 409.733px;">字母後面跟著字母或數字</td>
+<td style="width: 344.267px;">pi, abc, tmp1</td>
+</tr>
+<tr>
+<td style="width: 168px;"><strong>number</strong></td>
+<td style="width: 409.733px;">數值常數</td>
+<td style="width: 344.267px;">3.14159, 123</td>
+</tr>
+<tr>
+<td style="width: 168px; text-align: left;"><strong>semicolon</strong></td>
+<td style="width: 409.733px;">;</td>
+<td style="width: 344.267px;">;</td>
+</tr>
+</tbody>
+</table>
+
+<h4 id="Lexical-errors"><a href="#Lexical-errors" class="headerlink" title="Lexical errors"></a>Lexical errors</h4><p>在 lexical 階段除錯是困難的，因為只單純的讀進程式並進行分類。因此，這裡除的錯是 <strong>拼字的錯</strong>，也就是沒有任何一個 token 的 pattern 符合這筆輸入時就是錯誤。那 lexical analyzer 如何處理這個錯誤呢？</p>
+<p>龍書裡頭提到幾種修正辦法：</p>
+<ol>
+<li>刪掉已讀進的字元，直到剩餘字符合某 token 的 pattern</li>
+<li>僅刪掉一個字元</li>
+<li>插入缺少的字元</li>
+<li>替代某個字元</li>
+<li>交換某組相鄰字元的順序</li>
+</ol>
+<p>當然，最單純的方法就是以 <strong>一種</strong> 修正辦法改正目前讀入的字串，以得到符合規範的 lexeme。但最常見的方法其實是依據整份原始碼進行修正，使得全部都是合法的 lexemes，這個實作上也就複雜的多囉！</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://jkrvivian.github.io/2018/02/22/compiler-lexical-overview/" data-id="ckncysug500034m4we1t57vri" data-title="噢！我的編譯器 - Lexical Analysis Overview" class="article-share-link">Teilen</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/02/02/compiler-intro-2/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Älter</strong>
+      <div class="article-nav-title">噢！我的編譯器 - Introduction II</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/compiler/" rel="tag">compiler</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/music/" rel="tag">music</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/compiler/" style="font-size: 20px;">compiler</a> <a href="/tags/music/" style="font-size: 10px;">music</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">letzter Beitrag</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/02/22/compiler-lexical-overview/">噢！我的編譯器 - Lexical Analysis Overview</a>
+          </li>
+        
+          <li>
+            <a href="/2018/02/02/compiler-intro-2/">噢！我的編譯器 - Introduction II</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/30/compiler-intro-1/">噢！我的編譯器 - Introduction I</a>
+          </li>
+        
+          <li>
+            <a href="/2018/01/27/tokio-hotel-md/">德國天團 Tokio Hotel</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2021 Vivian Lin<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
